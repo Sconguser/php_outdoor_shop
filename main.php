@@ -22,6 +22,8 @@
     echo "<br />";
     echo '<a href="edit_user_info.php">Zmień dane osobowe</a>';
     echo "<br />";
+    echo '<a href="panel_admin.php">Panel administratora</a>';
+    echo "<br />";
     ?>
 </body>
 

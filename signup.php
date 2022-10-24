@@ -62,6 +62,9 @@ if (isset($_POST['email'])) {
                 } else {
                     if ($connection->query("INSERT INTO users VALUES(NULL, NULL, NULL, '$name',
                          '$lastname', '$password_hash', '$email')")){
+                        $result_new_user_id = $connection->query("SELECT id FROM users where email='$email'");
+                        $user_id =  $result_new_user_id->fetch_assoc()['id'];
+                        $connection->query("INSERT INTO addresses VALUES(NULL, $user_id, '', '', '')");
                         $_SESSION['signup_success'] = true;
                         header('Location: success_signup.php');
                     }else{

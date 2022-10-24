@@ -5,24 +5,57 @@ if(!isset($_SESSION['logged_in']) || !isset($_SESSION['user_data'])){
     exit();
 }
 require_once "connect.php";
-try{
-    $alreadyHasAddress = false;
-    mysqli_report(MYSQLI_REPORT_STRICT);
-    $connection = new mysqli($host, $db_user, $db_password, $db_name);
-    if ($connection->connect_errno != 0) {
-        throw new Exception(mysqli_connect_errno());
-    }else{
-        $id = $_SESSION['user_data']['id'];
-        $result = $connection->query("SELECT * FROM addressed WHERE user_id='$id'");
-        if($result->num_rows>0){
-            $alreadyHasAddress = true;
-            $_SESSION['address'] = $result->fetch_assoc();
-            $result->close();
+if(!isset($_SESSION['user_address'])) {
+    try {
+        $alreadyHasAddress = false;
+        mysqli_report(MYSQLI_REPORT_STRICT);
+        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+        if ($connection->connect_errno != 0) {
+            throw new Exception(mysqli_connect_errno());
+        } else {
+            $id = $_SESSION['user_data']['id'];
+            $result = $connection->query("SELECT * FROM addresses WHERE user_id='$id'");
+            if ($result->num_rows > 0) {
+                $alreadyHasAddress = true;
+                $_SESSION['user_address'] = $result->fetch_assoc();
+                $result->close();
+            }
+        }
+        $connection->close();
+    } catch (Exception $e) {
+        if ($debug) {
+            echo '<p>' . $e . '</p>';
         }
     }
-}catch(Exception $e){
-    if($debug){
-        echo '<p>'.$e.'</p>';
+}else{
+    if(isset($_POST['street']) && isset($_POST['city']) && isset($_POST['post_code'])){
+        try {
+            mysqli_report(MYSQLI_REPORT_STRICT);
+            $connection = new mysqli($host, $db_user, $db_password, $db_name);
+            if ($connection->connect_errno != 0) {
+                throw new Exception(mysqli_connect_errno());
+            } else {
+                $id = $_SESSION['user_data']['id'];
+                $street = htmlentities($_POST['street'], ENT_QUOTES, "UTF-8");
+                $city = htmlentities($_POST['city'], ENT_QUOTES, "UTF-8");
+                $post_code = htmlentities($_POST['post_code'], ENT_QUOTES, "UTF-8");
+//                echo $street;
+//                exit();
+                $result = $connection->query("UPDATE addresses
+                SET city='$city', street='$street', post_code='$post_code'
+                 WHERE user_id='$id'");
+                $_SESSION['user_address']['street'] = $street;
+                $_SESSION['user_address']['city'] = $city;
+                $_SESSION['user_address']['post_code'] = $post_code;
+                $_SESSION['success_change_address'] = true;
+                header('Location: success_change_address.php');
+                $connection->close();
+            }
+        }catch(Exception $e){
+            if($debug){
+                echo '<p>'.$e.'</p>';
+            }
+        }
     }
 }
 ?>
@@ -41,13 +74,19 @@ echo '<br />';
 echo '<a href="edit_user_info.php">Wróć</a>';
 ?>
 <form method="POST">
-    Name: <input type="text" value="<?php
-    echo $_SESSION['user_data']['name'];
-    ?>" name="name" />
+    Miasto: <input type="text" value="<?php
+    echo $_SESSION['user_address']['city'];
+    ?>" name="city" />
     <br />
     <br />
-    Lastname: <input type="text" value="<?php
-    echo $_SESSION['user_data']['lastname'];
-    ?>" name="lastname" />
+    Ulica: <input type="text" value="<?php
+    echo $_SESSION['user_address']['street'];
+    ?>" name="street" />
+    <br />
+    <br />
+    Kod pocztowy: <input type="text" value="<?php
+    echo $_SESSION['user_address']['post_code'];
+    ?>" name="post_code" />
+    <input type="submit" value="Zapisz dane"/>
 </form>
 </body>

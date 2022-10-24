@@ -9,7 +9,7 @@
     require_once "connect.php";
 
     $connection = @new mysqli($host, $db_user, $db_password, $db_name);
-    if($connection->connect_errno!=0 && debug==1){
+    if($connection->connect_errno!=0 && $debug==1){
         echo "Error:  ".$connection->connect_errno." Description".$connection->connect_error;
     }
     else{
