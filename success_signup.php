@@ -14,7 +14,7 @@ else{
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Rejestracja powiodła się</title>
+    <title>Rejestracja powiodła się gówno gówno gówno gówno</title>
 </head>
 <body> <br/><br/>
     Dziękujemy za rejestrację. Możesz się teraz zalogować.
