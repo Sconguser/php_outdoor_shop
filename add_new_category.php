@@ -5,7 +5,8 @@ if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
     exit();
 }
 require_once "connect.php";
-if(isset($_POST['category_name'])){
+
+if(isset($_POST['category_name']) && strlen($_POST['category_name'])>1){
     $connection = @new mysqli($host, $db_user, $db_password, $db_name);
     if ($connection->connect_errno != 0 && $debug == 1) {
         echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
@@ -39,6 +40,7 @@ Add category add category
 </form>
 </form>
 <br/><br/>
+<a href="main.php">Wróć do strony głównej</a>
 </body>
 
 </html>

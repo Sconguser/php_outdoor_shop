@@ -19,6 +19,9 @@ admin admin admin admin <br/><br/>
 <br />
 <br />
 <a href="admin_manage_products.php">Zarządzaj produktami</a>
+<br />
+<br />
+<a href="main.php">Wróć do strony głównej</a>
 </body>
 
 </html>

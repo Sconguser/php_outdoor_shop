@@ -22,8 +22,12 @@
     echo "<br />";
     echo '<a href="edit_user_info.php">Zmień dane osobowe</a>';
     echo "<br />";
-    echo '<a href="panel_admin.php">Panel administratora</a>';
+    echo '<a href="shop.php">Przejdź do sklepu</a>';
     echo "<br />";
+    if($_SESSION['user_data']['is_admin']) {
+        echo '<a href="panel_admin.php">Panel administratora</a>';
+        echo "<br />";
+    }
     ?>
 </body>
 

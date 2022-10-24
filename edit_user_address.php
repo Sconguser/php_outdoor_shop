@@ -89,4 +89,6 @@ echo '<a href="edit_user_info.php">Wróć</a>';
     ?>" name="post_code" />
     <input type="submit" value="Zapisz dane"/>
 </form>
+<br/><br/>
+<a href="main.php">Wróć do strony głównej</a>
 </body>

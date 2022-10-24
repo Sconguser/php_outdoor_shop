@@ -111,6 +111,9 @@ if (isset($_SESSION['user_list'])) {
     unset($_SESSION['user_list']);
 }
 ?>
+<br/><br/>
+<a href="main.php">Wróć do strony głównej</a>
 </body>
+
 
 </html>

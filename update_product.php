@@ -15,6 +15,7 @@ if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
 <body>
 Edit product edit product
 <br/><br/>
+<a href="main.php">Wróć do strony głównej</a>
 </body>
 
 </html>

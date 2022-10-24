@@ -91,6 +91,7 @@ if (isset($_SESSION['category_list'])) {
 }
 ?>
 <br/><br/>
+<a href="main.php">Wróć do strony głównej</a>
 </body>
 
 </html>
