@@ -168,7 +168,8 @@ if (isset($_POST['email'])) {
     <br/>
     <!-- <div class="g-recaptcha" data-sitekey="6LdT_KQiAAAAALNrfA3pdp7bdIlXNbDZhCw7nKgP" data-action="REGISTER"></div> -->
     <input type="submit" value="Zarejestruj się"/>
-
+    <br/>
+    <a href="index.php">Wróć na stronę logowania</a>
 </form>
 </body>
 

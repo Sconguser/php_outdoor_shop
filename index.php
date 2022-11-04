@@ -14,7 +14,7 @@ if (isset($_SESSION['logged_in']) && ($_SESSION['logged_in'])) {
     <title>Logowanie</title>
 </head>
 <body>
-Dupa dupa du dupa <br/><br/>
+Zaloguj się:<br/><br/>
 
 <form action="login.php" method="post">
     Login:<br/> <input type="text" name="login"/> <br/>

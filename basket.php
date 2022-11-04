@@ -38,7 +38,30 @@ function getBasketItems(mysqli $connection, int $debug): void
     }
 }
 
+if (isset($_POST['basket_item_id'])) {
+    if ($connection->connect_errno != 0 && $debug == 1) {
+        echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
+    } else {
+        try {
+            $basket_item_id = $_POST['basket_item_id'];
+            $item_id = $_POST['item_id'];
+            $quantity = $_POST['item_quantity'];
+            $result = $connection->query("DELETE FROM basket_items where id=$basket_item_id");
+            $result = $connection->query("SELECT * FROM items where id=$item_id");
+            $item = $result->fetch_assoc();
+            $total_price = $quantity * $item['price'];
+            $_SESSION['user_data']['basket']['total_price'] = $_SESSION['user_data']['basket']['total_price'] - $total_price;
+            $basket_id = $_SESSION['user_data']['basket']['id'];
+            $result = $connection->query("UPDATE basket SET total_price = total_price-$total_price where id=$basket_id");
+            $_SESSION['e_removeFromBasket'] = 'Usunięto produkt z koszyka';
+
+        } catch (Exception $e) {
+            $_SESSION['e_removeFromBasket'] = 'Nie udało się usunąć produktu z koszyka';
+        }
+    }
+}
 getBasketItems($connection, $debug);
+
 $connection->close();
 ?>
 
@@ -55,15 +78,21 @@ basket <br/><br/>
 <?php
 if (isset($_SESSION['basket_item_list'])) {
     foreach ($_SESSION['basket_item_list'] as $item => $cur) {
-        echo 'Id: ' . $cur['id'] . ' Item id: ' . $cur['item_id'] . ' Ilość: : ' . $cur['amount'] . ' ';
+        echo 'Id: ' . $cur['id'] . ' Item id: ' . $cur['item_id'] . ' Ilość: ' . $cur['amount'] . ' ';
+        echo '<form method="POST">';
+        echo '<input type="hidden" name="basket_item_id" value="' . $cur['id'] . '"/>';
+        echo '<input type="hidden" name="item_id" value="' . $cur['item_id'] . '"/>';
+        echo '<input type="hidden" name="item_quantity" value="' . $cur['amount'] . '"/>';
+        echo '<button type="submit">Remove from basket</button>';
+        echo '</form>';
         echo '<br/>';
     }
     echo '<br/>';
-    echo 'Cena: '.$_SESSION['user_data']['basket']['total_price'].'zł';
+    echo 'Cena: ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
     echo '<br/>';
     echo '<a href="summary.php"> Przejdź do podsumowania </a>';
     unset($_SESSION['basket_item_list']);
-}else{
+} else {
     echo 'Koszyk jest pusty';
 }
 ?>

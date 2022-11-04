@@ -120,7 +120,7 @@ if (isset($_SESSION['product_list'])) {
         echo 'Id: ' . $cur['id'] . ' Nazwa: ' . $cur['name'] . ' Cena: ' . $cur['price'] . ' Ilość: ' . $cur['quantity'] . ' ';
         echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';
         echo '</br>';
-        echo 'Ilość:<input type="number" name="quantity"/>';
+        echo 'Ilość:<input type="number" name="quantity" value="1"/>';
         echo '</br>';
         echo '<input type="submit" value="Dodaj do koszyka" />';
         echo '</form>';
