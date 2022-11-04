@@ -24,11 +24,18 @@
     echo "<br />";
     echo '<a href="shop.php">Przejdź do sklepu</a>';
     echo "<br />";
+    echo '<a href="basket.php"> Przejdź do koszyka</a>';
+    echo "<br />";
     if($_SESSION['user_data']['is_admin']) {
         echo '<a href="panel_admin.php">Panel administratora</a>';
         echo "<br />";
     }
+    if(isset($_SESSION['e_mainRedirect'])){
+        echo '<p>'.$_SESSION['e_mainRedirect'].'</p>';
+        unset($_SESSION['e_mainRedirect']);
+    }
     ?>
+
 </body>
 
 </html>

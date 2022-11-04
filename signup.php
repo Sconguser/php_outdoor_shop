@@ -65,6 +65,7 @@ if (isset($_POST['email'])) {
                         $result_new_user_id = $connection->query("SELECT id FROM users where email='$email'");
                         $user_id =  $result_new_user_id->fetch_assoc()['id'];
                         $connection->query("INSERT INTO addresses VALUES(NULL, $user_id, '', '', '')");
+                        $connection->query("INSERT INTO basket VALUES(NULL, $user_id, 0)");
                         $_SESSION['signup_success'] = true;
                         header('Location: success_signup.php');
                     }else{

@@ -112,13 +112,25 @@ if (isset($_SESSION['category_list'])) {
 }
 if (isset($_SESSION['product_list'])) {
     foreach ($_SESSION['product_list'] as $item => $cur) {
+        echo '<form method="POST" action="add_to_basket.php">';
         echo 'Id: ' . $cur['id'] . ' Nazwa: ' . $cur['name'] . ' Cena: ' . $cur['price'] . ' ';
+        echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';
         echo '</br>';
+        echo 'Ilość:<input type="number" name="quantity"/>';
+        echo '</br>';
+        echo '<input type="submit" value="Dodaj do koszyka" />';
+        echo '</form>';
     }
     unset($_SESSION['product_list']);
 }
 ?>
 <br/><br/>
+<?php
+if(isset($_SESSION['e_addToBasket'])){
+    echo '<p>'.$_SESSION['e_addToBasket'].'</p>';
+    unset($_SESSION['e_addToBasket']);
+}
+?>
 <br/><br/>
 <a href="main.php">Wróć do strony głównej</a>
 </body>

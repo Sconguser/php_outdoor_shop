@@ -28,6 +28,9 @@
                     $login_result->close();
                     $_SESSION['logged_in'] = true;
                     unset($_SESSION['error']);
+                    $user_id = $_SESSION['user_data']['id'];
+                    $basket = $connection->query("SELECT * FROM basket WHERE user_id = $user_id")->fetch_assoc();
+                    $_SESSION['user_data']['basket'] = $basket;
                     header('Location: main.php');
                 }
                 else{
