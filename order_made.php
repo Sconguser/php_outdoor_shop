@@ -48,6 +48,19 @@ if ($connection->connect_errno != 0 && $debug == 1) {
             $result = $connection->query("SELECT * FROM orders WHERE user_id = $user_id");
             $_SESSION['current_order'] = $result->fetch_assoc();
             $order_id = $_SESSION['current_order']['id'];
+
+            foreach ($_SESSION['basket_item_list'] as $item => $cur) {
+                $basket_item_id = $cur['id'];
+                $item_id = $cur['item_id'];
+                $quantity = $cur['amount'];
+                $result = $connection->query("SELECT * FROM items WHERE id=$item_id");
+                $item_from_db = $result->fetch_assoc();
+                if($quantity > $item_from_db['quantity']){
+                    $_SESSION['e_orderMade'] = 'Jednego lub więcej przedmiotów nie ma już w naszych magazynach. Przepraszamy :(';
+                    header('Location:summary.php');
+                    exit();
+                }
+            }
             foreach ($_SESSION['basket_item_list'] as $item => $cur) {
                 $basket_item_id = $cur['id'];
                 $item_id = $cur['item_id'];
@@ -59,6 +72,7 @@ if ($connection->connect_errno != 0 && $debug == 1) {
             $connection->query("UPDATE basket SET total_price = 0 WHERE id=$basket_id");
             $_SESSION['user_data']['basket']['total_price']=0;
             unset($_SESSION['current_order']);
+            unset($_SESSION['basket_item_list']);
         }
     } catch (Exception $e) {
         unset($_SESSION['current_order']);

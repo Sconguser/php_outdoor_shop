@@ -4,7 +4,36 @@ if(!isset($_SESSION['logged_in']) || !isset($_SESSION['user_data'])){
     header('Location: index.php');
     exit();
 }
+require_once "connect.php";
+if(isset($_POST['name'])) {
+    try {
+        mysqli_report(MYSQLI_REPORT_STRICT);
+        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+        if ($connection->connect_errno != 0) {
+            throw new Exception(mysqli_connect_errno());
+        } else {
+            $id = $_SESSION['user_data']['id'];
+            $name = htmlentities($_POST['name'], ENT_QUOTES, "UTF-8");
+            $lastname = htmlentities($_POST['lastname'], ENT_QUOTES, "UTF-8");
+            $result = $connection->query("UPDATE users
+                SET name='$name', lastname='$lastname'
+                 WHERE id='$id'");
+            $_SESSION['user_data']['name'] = $name;
+            $_SESSION['user_data']['lastname'] = $lastname;
+            $_SESSION['namechange_success'] = "Dane użytkownika poprawnie zaktualizowane";
+            $connection->close();
+        }
+    } catch (Exception $e) {
+        if ($debug) {
+            echo '<p>' . $e . '</p>';
+        }
+    }
+}
+
 ?>
+
+
+
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -24,9 +53,16 @@ if(!isset($_SESSION['logged_in']) || !isset($_SESSION['user_data'])){
     echo $_SESSION['user_data']['name'];
 ?>" name="name" />
     <br />
-    <br />
     Lastname: <input type="text" value="<?php
     echo $_SESSION['user_data']['lastname'];
     ?>" name="lastname" />
+    <br />
+    <input type="submit" value="Zapisz dane"/>
 </form>
+<?php
+    if(isset($_SESSION['namechange_success'])){
+        echo $_SESSION['namechange_success'];
+        unset($_SESSION['namechange_success']);
+    }
+?>
 </body>

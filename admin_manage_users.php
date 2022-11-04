@@ -101,6 +101,11 @@ if (isset($_SESSION['user_list'])) {
             echo '<input type="hidden" name="delete_user" value="' . $cur['id'] . '"/>';
             echo '<button type="submit">Delete this user</button>';
             echo '</form>';
+
+            echo '<form action="user_orders.php" method="POST">';
+            echo '<input type="hidden" name="user_id" value="' . $cur['id'] . '"/>';
+            echo '<button type="submit">Change orders status</button>';
+            echo '</form>';
         } else {
             echo '<br />';
             echo '<b>admin</b>';

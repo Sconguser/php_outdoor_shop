@@ -26,6 +26,8 @@
     echo "<br />";
     echo '<a href="basket.php"> Przejdź do koszyka</a>';
     echo "<br />";
+    echo '<a href="user_orders.php">Zobacz swoje zamówienia</a>';
+    echo "<br />";
     if($_SESSION['user_data']['is_admin']) {
         echo '<a href="panel_admin.php">Panel administratora</a>';
         echo "<br />";
@@ -37,6 +39,10 @@
     if(isset($_SESSION['e_summaryRedirect']))
     {
         unset($_SESSION['e_summaryRedirect']);
+    }
+    if(isset($_SESSION['e_userOrders'])){
+        echo '<p>'.$_SESSION['e_userOrders'].'</p>';
+        unset($_SESSION['e_userOrders']);
     }
     ?>
 

@@ -14,6 +14,14 @@
                 $basket_id = $_SESSION['user_data']['basket']['id'];
                 $item_id = $_POST['item_id'];
                 $quantity = $_POST['quantity'];
+                $result = $connection->query("SELECT * FROM items WHERE id = $item_id");
+                $item = $result->fetch_assoc();
+                $item_stock = $item['quantity'];
+                if($quantity > $item_stock){
+                    $_SESSION['e_addToBasket'] = "Nie mamy tyle sztuk tego produktu w magazynach";
+                    header("Location:shop.php");
+                    exit();
+                }
                 if ($result = $connection->query("INSERT INTO basket_items VALUES (NULL, $basket_id, $item_id, $quantity)")) {
                     $total_price = $_SESSION['user_data']['basket']['total_price'];
                     $item = $connection->query("SELECT * FROM items WHERE id=$item_id")->fetch_assoc();
@@ -26,7 +34,7 @@
                     throw new Exception('Failed to get Category list');
                 }
             } catch (Exception $e) {
-                $_SESSION['e_addToBasket'] = 'Coś poszło nie tak';
+                $_SESSION['e_addToBasket'] = $e;
                 header('Location:shop.php');
             }
         }
