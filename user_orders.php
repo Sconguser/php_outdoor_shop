@@ -1,4 +1,5 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
 require_once "connect.php";
 $connection = @new mysqli($host, $db_user, $db_password, $db_name);
@@ -55,44 +56,53 @@ if (isset($_POST['order_status'])) {
     <title>Zamówienia</title>
 </head>
 <body>
-orderorder <br/><br/>
+<div class="container">
+    <?php
+    if ($_SESSION['user_data']['is_admin']) {
+        require_once "admin_navbar.php";
+    } else {
+        require_once "navbar.php";
+    }
+    ?>
+    orderorder <br/><br/>
 
-<?php
-if (isset($_SESSION['user_orders'])) {
-    foreach ($_SESSION['user_orders'] as $item => $cur) {
-        $defaultStatus = $cur['order_status'];
-        if ($_SESSION['user_data']['is_admin']) {
-            echo '<form method="POST">';
-            echo '<select name="order_status">';
-            echo ' <option value=' . $defaultStatus . '>' . $defaultStatus . '</option>';
-            echo ' <option value="Wysłane">Wysłane</option>';
-            echo ' <option value="Dostarczone">Dostarczone</option>';
-            echo ' <option value="Zwrócone">Zwrócone</option>';
-            echo '</select>';
-            echo '<br/>';
-            echo 'Id: ' . $cur['id'] . ' Price: ' . $cur['price'] . ' Date: ' . $cur['date_of_order'] . ' ' . 'Status: ' . $cur['order_status'];
-            echo '<input type="hidden" name="order_id" value="' . $cur['id'] . '"/>';
-            echo '<br/>';
-            echo '<input type="submit" value="Zmień status zamówienia" />';
-            echo '</form>';
-            echo '<br/>';
-        } else {
-            echo 'Id: ' . $cur['id'] . ' Price: ' . $cur['price'] . ' Date: ' . $cur['date_of_order'] . ' ' . 'Status: ' . $cur['order_status'];
-            echo '<br/>';
+    <?php
+    if (isset($_SESSION['user_orders'])) {
+        foreach ($_SESSION['user_orders'] as $item => $cur) {
+            $defaultStatus = $cur['order_status'];
+            if ($_SESSION['user_data']['is_admin']) {
+                echo '<form method="POST">';
+                echo '<select name="order_status">';
+                echo ' <option value=' . $defaultStatus . '>' . $defaultStatus . '</option>';
+                echo ' <option value="Wysłane">Wysłane</option>';
+                echo ' <option value="Dostarczone">Dostarczone</option>';
+                echo ' <option value="Zwrócone">Zwrócone</option>';
+                echo '</select>';
+                echo '<br/>';
+                echo 'Id: ' . $cur['id'] . ' Price: ' . $cur['price'] . ' Date: ' . $cur['date_of_order'] . ' ' . 'Status: ' . $cur['order_status'];
+                echo '<input type="hidden" name="order_id" value="' . $cur['id'] . '"/>';
+                echo '<br/>';
+                echo '<input type="submit" value="Zmień status zamówienia" />';
+                echo '</form>';
+                echo '<br/>';
+            } else {
+                echo 'Id: ' . $cur['id'] . ' Price: ' . $cur['price'] . ' Date: ' . $cur['date_of_order'] . ' ' . 'Status: ' . $cur['order_status'];
+                echo '<br/>';
+            }
         }
+        echo '<br/>';
+        unset($_SESSION['user_orders']);
+        if (isset($_SESSION['e_ChangeOrderStatus'])) {
+            echo $_SESSION['e_ChangeOrderStatus'];
+            unset($_SESSION['e_ChangeOrderStatus']);
+        }
+    } else {
+        echo 'Nie masz jeszcze żadnych zamówień';
     }
-    echo '<br/>';
-    unset($_SESSION['user_orders']);
-    if (isset($_SESSION['e_ChangeOrderStatus'])) {
-        echo $_SESSION['e_ChangeOrderStatus'];
-        unset($_SESSION['e_ChangeOrderStatus']);
-    }
-} else {
-    echo 'Nie masz jeszcze żadnych zamówień';
-}
-?>
-<br/><br/>
-<a href="main.php">Wróć do strony głównej</a>
+    ?>
+    <br/><br/>
+    <a href="main.php">Wróć do strony głównej</a>
+</div>
 </body>
 
 

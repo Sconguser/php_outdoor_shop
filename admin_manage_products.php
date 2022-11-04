@@ -1,4 +1,5 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
 if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
     header('Location: index.php');
@@ -13,16 +14,19 @@ if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
     <title>Panel zarządzania produktami</title>
 </head>
 <body>
-admin products  admin admin admin
-<br/><br/>
+<div class="container">
 
-<a href="add_new_category.php">Dodaj nową kategorię produktu</a>
-<br />
-<br />
-<a href="add_new_product.php">Dodaj nowy produkt</a>
-<br />
-<br />
-<a href="update_product.php">Edytuj produkt</a>
+
+    admin products admin admin admin
+    <br/><br/>
+
+    <a href="add_new_category.php">Dodaj nową kategorię produktu</a>
+    <br/>
+    <br/>
+    <a href="add_new_product.php">Dodaj nowy produkt</a>
+    <br/>
+    <br/>
+    <a href="update_product.php">Edytuj produkt</a>
+</div>
 </body>
-
 </html>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "bootstrap_include.php";
 if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
     header('Location: index.php');
     exit();
@@ -67,31 +68,40 @@ if (!isset($_SESSION['category_list'])) {
     <title>Dodawanie produktu</title>
 </head>
 <body>
-Dodaj nowy produkt dodaj nowy produkt <br/> <br/>
-Kategoria:
-<?php
-if (isset($_SESSION['category_list'])) {
-    echo '<form method="POST">';
-    echo '<select name="category">';
-    echo ' <option value="select"> Wybierz z listy </option>';
-    foreach ($_SESSION['category_list'] as $item => $cur) {
-        echo '<option value="' . $cur['id'] . '">' . $cur['category_name'] . '</option>';
+<div class="container">
+    <?php
+    if ($_SESSION['user_data']['is_admin']) {
+        require_once "admin_navbar.php";
+    } else {
+        require_once "navbar.php";
     }
-    echo '</select>';
-    echo '<br />';
-    echo 'Nazwa: <br /><input type="text" name="name"/>';
-    echo '<br/>';
-    echo 'Ilość: <br /><input type="number" name="quantity"/>';
-    echo '<br />';
-    echo 'Cena: <br /><input type="number" step="0.01" name="price"/>';
-    echo '<br />';
-    echo '<input type="submit" value="Dodaj nowy produkt" />';
-    echo '</form>';
-    unset($_SESSION['category_list']);
-}
-?>
-<br/><br/>
-<a href="main.php">Wróć do strony głównej</a>
+    ?>
+    Dodaj nowy produkt dodaj nowy produkt <br/> <br/>
+    Kategoria:
+    <?php
+    if (isset($_SESSION['category_list'])) {
+        echo '<form method="POST">';
+        echo '<select name="category">';
+        echo ' <option value="select"> Wybierz z listy </option>';
+        foreach ($_SESSION['category_list'] as $item => $cur) {
+            echo '<option value="' . $cur['id'] . '">' . $cur['category_name'] . '</option>';
+        }
+        echo '</select>';
+        echo '<br />';
+        echo 'Nazwa: <br /><input type="text" name="name"/>';
+        echo '<br/>';
+        echo 'Ilość: <br /><input type="number" name="quantity"/>';
+        echo '<br />';
+        echo 'Cena: <br /><input type="number" step="0.01" name="price"/>';
+        echo '<br />';
+//        echo '<input type="submit" value="Dodaj nowy produkt" />';
+        echo '<button type="submit" class="btn btn-primary btn-sm">Dodaj nowy produkt</button>';
+        echo '</form>';
+        unset($_SESSION['category_list']);
+    }
+    ?>
+    <br/><br/>
+    <a href="main.php">Wróć do strony głównej</a>
+</div>
 </body>
-
 </html>

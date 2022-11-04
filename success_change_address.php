@@ -1,10 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['success_change_address'])){
+if (!isset($_SESSION['success_change_address'])) {
     header('Location: index.php');
     exit();
-}
-else{
+} else {
     unset($_SESSION['success_change_address']);
 }
 ?>
@@ -16,10 +15,14 @@ else{
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Zmiana adresu się powiodła</title>
 </head>
-<body> <br/><br/>
+
+<body>
+<div class="container">
+    <br/><br/>
     Zmiana adresu przebiegła pomyślnie.
     <a href="edit_user_address.php">Wróć</a>
     <br/>
-</form>
+    </form>
+</div>
 </body>
 </html>

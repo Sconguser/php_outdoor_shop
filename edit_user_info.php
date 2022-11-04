@@ -1,11 +1,12 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
-if(!isset($_SESSION['logged_in']) || !isset($_SESSION['user_data'])){
+if (!isset($_SESSION['logged_in']) || !isset($_SESSION['user_data'])) {
     header('Location: index.php');
     exit();
 }
 require_once "connect.php";
-if(isset($_POST['name'])) {
+if (isset($_POST['name'])) {
     try {
         mysqli_report(MYSQLI_REPORT_STRICT);
         $connection = new mysqli($host, $db_user, $db_password, $db_name);
@@ -33,7 +34,6 @@ if(isset($_POST['name'])) {
 ?>
 
 
-
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -42,27 +42,37 @@ if(isset($_POST['name'])) {
     <title>Strona do edycji danych osobowych</title>
 </head>
 <body>
-
-<?php
+<div class="container">
+    <?php
+    if ($_SESSION['user_data']['is_admin']) {
+        require_once "admin_navbar.php";
+    } else {
+        require_once "navbar.php";
+    }
+    ?>
+    <?php
     echo '<a href="main.php">Wróć na stronę główną</a>';
     echo '<br />';
     echo '<a href="edit_user_address.php">Zmień dane adresowe</a>';
-?>
-<form method="POST">
-    Name: <input type="text" value="<?php
-    echo $_SESSION['user_data']['name'];
-?>" name="name" />
-    <br />
-    Lastname: <input type="text" value="<?php
-    echo $_SESSION['user_data']['lastname'];
-    ?>" name="lastname" />
-    <br />
-    <input type="submit" value="Zapisz dane"/>
-</form>
-<?php
-    if(isset($_SESSION['namechange_success'])){
+    ?>
+    <form method="POST">
+        Name: <input type="text" value="<?php
+        echo $_SESSION['user_data']['name'];
+        ?>" name="name"/>
+        <br/>
+        Lastname: <input type="text" value="<?php
+        echo $_SESSION['user_data']['lastname'];
+        ?>" name="lastname"/>
+        <br/>
+<!--        <input type="submit" value="Zapisz dane"/>-->
+        <button type="submit" class="btn btn-primary btn-sm">Zapisz dane</button>
+    </form>
+    <?php
+    if (isset($_SESSION['namechange_success'])) {
         echo $_SESSION['namechange_success'];
         unset($_SESSION['namechange_success']);
     }
-?>
+    ?>
+</div>
 </body>
+</html>

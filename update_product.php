@@ -1,4 +1,5 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
 if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
     header('Location: index.php');
@@ -13,9 +14,11 @@ if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
     <title>Edycja produktu</title>
 </head>
 <body>
-Edit product edit product
-<br/><br/>
-<a href="main.php">Wróć do strony głównej</a>
+<div class="container">
+    Edit product edit product
+    <br/><br/>
+    <a href="main.php">Wróć do strony głównej</a>
+</div>
 </body>
 
 </html>

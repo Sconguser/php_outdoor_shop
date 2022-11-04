@@ -1,11 +1,12 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
-if(!isset($_SESSION['logged_in']) || !isset($_SESSION['user_data'])){
+if (!isset($_SESSION['logged_in']) || !isset($_SESSION['user_data'])) {
     header('Location: index.php');
     exit();
 }
 require_once "connect.php";
-if(!isset($_SESSION['user_address'])) {
+if (!isset($_SESSION['user_address'])) {
     try {
         $alreadyHasAddress = false;
         mysqli_report(MYSQLI_REPORT_STRICT);
@@ -27,8 +28,8 @@ if(!isset($_SESSION['user_address'])) {
             echo '<p>' . $e . '</p>';
         }
     }
-}else{
-    if(isset($_POST['street']) && isset($_POST['city']) && isset($_POST['post_code'])){
+} else {
+    if (isset($_POST['street']) && isset($_POST['city']) && isset($_POST['post_code'])) {
         try {
             mysqli_report(MYSQLI_REPORT_STRICT);
             $connection = new mysqli($host, $db_user, $db_password, $db_name);
@@ -51,9 +52,9 @@ if(!isset($_SESSION['user_address'])) {
                 header('Location: success_change_address.php');
                 $connection->close();
             }
-        }catch(Exception $e){
-            if($debug){
-                echo '<p>'.$e.'</p>';
+        } catch (Exception $e) {
+            if ($debug) {
+                echo '<p>' . $e . '</p>';
             }
         }
     }
@@ -67,32 +68,40 @@ if(!isset($_SESSION['user_address'])) {
     <title>Strona do edycji danych adresowych</title>
 </head>
 <body>
-
-<?php
-if(isset($_SESSION['e_summaryRedirect']))
-{
-    echo '<a href="summary.php">Wróć</a>';
-}
-else{
-    echo '<a href="edit_user_info.php">Wróć</a>';
-}
-?>
-<form method="POST">
-    Miasto: <input type="text" value="<?php
-    echo $_SESSION['user_address']['city'];
-    ?>" name="city" />
-    <br />
-    <br />
-    Ulica: <input type="text" value="<?php
-    echo $_SESSION['user_address']['street'];
-    ?>" name="street" />
-    <br />
-    <br />
-    Kod pocztowy: <input type="text" value="<?php
-    echo $_SESSION['user_address']['post_code'];
-    ?>" name="post_code" />
-    <input type="submit" value="Zapisz dane"/>
-</form>
-<br/><br/>
-<a href="main.php">Wróć do strony głównej</a>
+<div class="container">
+    <?php
+    if ($_SESSION['user_data']['is_admin']) {
+        require_once "admin_navbar.php";
+    } else {
+        require_once "navbar.php";
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['e_summaryRedirect'])) {
+        echo '<a href="summary.php">Wróć</a>';
+    } else {
+        echo '<a href="edit_user_info.php">Wróć</a>';
+    }
+    ?>
+    <form method="POST">
+        Miasto: <input type="text" value="<?php
+        echo $_SESSION['user_address']['city'];
+        ?>" name="city"/>
+        <br/>
+        <br/>
+        Ulica: <input type="text" value="<?php
+        echo $_SESSION['user_address']['street'];
+        ?>" name="street"/>
+        <br/>
+        <br/>
+        Kod pocztowy: <input type="text" value="<?php
+        echo $_SESSION['user_address']['post_code'];
+        ?>" name="post_code"/>
+<!--        <input type="submit" value="Zapisz dane"/>-->
+        <button type="submit" class="btn btn-primary btn-sm">Zapisz dane</button>
+    </form>
+    <br/><br/>
+    <a href="main.php">Wróć do strony głównej</a>
+</div>
 </body>
+</html>

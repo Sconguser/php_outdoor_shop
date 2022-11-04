@@ -1,4 +1,5 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
 if (!isset($_SESSION['user_data'])) {
     header('Location: index.php');
@@ -61,7 +62,7 @@ if (!isset($_SESSION['product_list'])) {
     }
     $connection->close();
 }
-if (isset($_POST['chosen_category']) && $_POST['chosen_category']!=-1) {
+if (isset($_POST['chosen_category']) && $_POST['chosen_category'] != -1) {
     $connection = @new mysqli($host, $db_user, $db_password, $db_name);
     if ($connection->connect_errno != 0 && $debug == 1) {
         echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
@@ -100,43 +101,52 @@ if (isset($_POST['chosen_category']) && $_POST['chosen_category']!=-1) {
     <title>Sklep</title>
 </head>
 <body>
-Kategoria:
-<?php
-if (isset($_SESSION['category_list'])) {
-    echo '<form method="POST">';
-    echo '<select name="chosen_category">';
-    echo ' <option value=-1>Brak</option>';
-    foreach ($_SESSION['category_list'] as $item => $cur) {
-        echo '<option value="' . $cur['id'] . '">' . $cur['category_name'] . '</option>';
+<div class="container">
+    <?php
+    if ($_SESSION['user_data']['is_admin']) {
+        require_once "admin_navbar.php";
+    } else {
+        require_once "navbar.php";
     }
-    echo '</select>';
-    echo '<input type="submit" value="Wyszukaj po kategorii" />';
-    echo '</form>';
-    unset($_SESSION['category_list']);
-}
-if (isset($_SESSION['product_list'])) {
-    foreach ($_SESSION['product_list'] as $item => $cur) {
-        echo '<form method="POST" action="add_to_basket.php">';
-        echo 'Id: ' . $cur['id'] . ' Nazwa: ' . $cur['name'] . ' Cena: ' . $cur['price'] . ' Ilość: ' . $cur['quantity'] . ' ';
-        echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';
-        echo '</br>';
-        echo 'Ilość:<input type="number" name="quantity" value="1"/>';
-        echo '</br>';
-        echo '<input type="submit" value="Dodaj do koszyka" />';
+    ?>
+    Kategoria:
+    <?php
+    if (isset($_SESSION['category_list'])) {
+        echo '<form method="POST">';
+        echo '<select name="chosen_category">';
+        echo ' <option value=-1>Brak</option>';
+        foreach ($_SESSION['category_list'] as $item => $cur) {
+            echo '<option value="' . $cur['id'] . '">' . $cur['category_name'] . '</option>';
+        }
+        echo '</select>';
+        echo '<input type="submit" value="Wyszukaj po kategorii" />';
         echo '</form>';
+        unset($_SESSION['category_list']);
     }
-    unset($_SESSION['product_list']);
-}
-?>
-<br/><br/>
-<?php
-if(isset($_SESSION['e_addToBasket'])){
-    echo '<p>'.$_SESSION['e_addToBasket'].'</p>';
-    unset($_SESSION['e_addToBasket']);
-}
-?>
-<br/><br/>
-<a href="main.php">Wróć do strony głównej</a>
+    if (isset($_SESSION['product_list'])) {
+        foreach ($_SESSION['product_list'] as $item => $cur) {
+            echo '<form method="POST" action="add_to_basket.php">';
+            echo 'Id: ' . $cur['id'] . ' Nazwa: ' . $cur['name'] . ' Cena: ' . $cur['price'] . ' Ilość: ' . $cur['quantity'] . ' ';
+            echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';
+            echo '</br>';
+            echo 'Ilość:<input type="number" name="quantity" value="1"/>';
+            echo '</br>';
+            echo '<input type="submit" value="Dodaj do koszyka" />';
+            echo '</form>';
+        }
+        unset($_SESSION['product_list']);
+    }
+    ?>
+    <br/><br/>
+    <?php
+    if (isset($_SESSION['e_addToBasket'])) {
+        echo '<p>' . $_SESSION['e_addToBasket'] . '</p>';
+        unset($_SESSION['e_addToBasket']);
+    }
+    ?>
+    <br/><br/>
+    <a href="main.php">Wróć do strony głównej</a>
+</div>
 </body>
 
 </html>

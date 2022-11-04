@@ -26,7 +26,6 @@ function getBasketItems(mysqli $connection, int $debug): void
 }
 
 
-
 session_start();
 if (!isset($_SESSION['user_data']) || !isset($_SESSION['user_data']['basket'])) {
     $_SESSION['e_orderMade'] = "Coś poszło nie tak";
@@ -55,7 +54,7 @@ if ($connection->connect_errno != 0 && $debug == 1) {
                 $quantity = $cur['amount'];
                 $result = $connection->query("SELECT * FROM items WHERE id=$item_id");
                 $item_from_db = $result->fetch_assoc();
-                if($quantity > $item_from_db['quantity']){
+                if ($quantity > $item_from_db['quantity']) {
                     $_SESSION['e_orderMade'] = 'Jednego lub więcej przedmiotów nie ma już w naszych magazynach. Przepraszamy :(';
                     header('Location:summary.php');
                     exit();
@@ -70,7 +69,7 @@ if ($connection->connect_errno != 0 && $debug == 1) {
                 $connection->query("DELETE FROM basket_items where id=$basket_item_id");
             }
             $connection->query("UPDATE basket SET total_price = 0 WHERE id=$basket_id");
-            $_SESSION['user_data']['basket']['total_price']=0;
+            $_SESSION['user_data']['basket']['total_price'] = 0;
             unset($_SESSION['current_order']);
             unset($_SESSION['basket_item_list']);
         }
@@ -87,7 +86,6 @@ if ($connection->connect_errno != 0 && $debug == 1) {
 ?>
 
 
-
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -96,11 +94,19 @@ if ($connection->connect_errno != 0 && $debug == 1) {
     <title>Zamówienie złożone</title>
 </head>
 <body>
-Dziękujemy za złożenie zamówienia <br/><br/>
-<a href="user_orders.php">Zobacz swoje zamówienia</a>
-<br/><br/>
-<a href="main.php">Wróć do strony głównej</a>
+<div class="container">
+    <?php
+    if ($_SESSION['user_data']['is_admin']) {
+        require_once "admin_navbar.php";
+    } else {
+        require_once "navbar.php";
+    }
+    ?>
+    Dziękujemy za złożenie zamówienia <br/><br/>
+    <a href="user_orders.php">Zobacz swoje zamówienia</a>
+    <br/><br/>
+    <a href="main.php">Wróć do strony głównej</a>
+</div>
 </body>
-
 
 </html>

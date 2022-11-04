@@ -1,4 +1,5 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
 if (!isset($_SESSION['user_data']) || !isset($_SESSION['user_data']['basket'])) {
     $_SESSION['e_mainRedirect'] = "Coś poszło nie tak";
@@ -73,32 +74,40 @@ $connection->close();
     <title>Koszyk</title>
 </head>
 <body>
-basket <br/><br/>
-
-<?php
-if (isset($_SESSION['basket_item_list'])) {
-    foreach ($_SESSION['basket_item_list'] as $item => $cur) {
-        echo 'Id: ' . $cur['id'] . ' Item id: ' . $cur['item_id'] . ' Ilość: ' . $cur['amount'] . ' ';
-        echo '<form method="POST">';
-        echo '<input type="hidden" name="basket_item_id" value="' . $cur['id'] . '"/>';
-        echo '<input type="hidden" name="item_id" value="' . $cur['item_id'] . '"/>';
-        echo '<input type="hidden" name="item_quantity" value="' . $cur['amount'] . '"/>';
-        echo '<button type="submit">Remove from basket</button>';
-        echo '</form>';
-        echo '<br/>';
+<div class="container">
+    <?php
+    if ($_SESSION['user_data']['is_admin']) {
+        require_once "admin_navbar.php";
+    } else {
+        require_once "navbar.php";
     }
-    echo '<br/>';
-    echo 'Cena: ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
-    echo '<br/>';
-    echo '<a href="summary.php"> Przejdź do podsumowania </a>';
-    unset($_SESSION['basket_item_list']);
-} else {
-    echo 'Koszyk jest pusty';
-}
-?>
-<br/><br/>
-<a href="main.php">Wróć do strony głównej</a>
-</body>
+    ?>
+    basket <br/><br/>
 
+    <?php
+    if (isset($_SESSION['basket_item_list'])) {
+        foreach ($_SESSION['basket_item_list'] as $item => $cur) {
+            echo 'Id: ' . $cur['id'] . ' Item id: ' . $cur['item_id'] . ' Ilość: ' . $cur['amount'] . ' ';
+            echo '<form method="POST">';
+            echo '<input type="hidden" name="basket_item_id" value="' . $cur['id'] . '"/>';
+            echo '<input type="hidden" name="item_id" value="' . $cur['item_id'] . '"/>';
+            echo '<input type="hidden" name="item_quantity" value="' . $cur['amount'] . '"/>';
+            echo '<button type="submit">Remove from basket</button>';
+            echo '</form>';
+            echo '<br/>';
+        }
+        echo '<br/>';
+        echo 'Cena: ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
+        echo '<br/>';
+        echo '<a href="summary.php"> Przejdź do podsumowania </a>';
+        unset($_SESSION['basket_item_list']);
+    } else {
+        echo 'Koszyk jest pusty';
+    }
+    ?>
+    <br/><br/>
+    <a href="main.php">Wróć do strony głównej</a>
+    </div>
+    </body>
 
 </html>

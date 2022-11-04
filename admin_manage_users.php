@@ -1,4 +1,5 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
 if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
     header('Location: index.php');
@@ -85,40 +86,49 @@ if (!isset($_SESSION['user_list'])) {
     <title>Zarządzaj użytkownikami</title>
 </head>
 <body>
-admin users adminusersadmin  users admin <br/><br/>
-
-<?php
-if (isset($_SESSION['user_list'])) {
-    foreach ($_SESSION['user_list'] as $item => $cur) {
-        echo 'Id: ' . $cur['id'] . ' Imię: ' . $cur['name'] . ' Nazwisko: ' . $cur['lastname'] . ' ';
-        if (!$cur['is_admin']) {
-            echo '<form method="POST">';
-            echo '<input type="hidden" name="admin_privileges" value="' . $cur['id'] . '"/>';
-            echo '<button type="submit">Give admin privileges</button>';
-            echo '</form>';
-
-            echo '<form method="POST">';
-            echo '<input type="hidden" name="delete_user" value="' . $cur['id'] . '"/>';
-            echo '<button type="submit">Delete this user</button>';
-            echo '</form>';
-
-            echo '<form action="user_orders.php" method="POST">';
-            echo '<input type="hidden" name="user_id" value="' . $cur['id'] . '"/>';
-            echo '<button type="submit">Change orders status</button>';
-            echo '</form>';
-        } else {
-            echo '<br />';
-            echo '<b>admin</b>';
-            echo '<br />';
-        }
-        echo '</br>';
+<div class="container">
+    <?php
+    if ($_SESSION['user_data']['is_admin']) {
+        require_once "admin_navbar.php";
+    } else {
+        require_once "navbar.php";
     }
-    unset($_SESSION['user_list']);
-}
-?>
-<br/><br/>
-<a href="main.php">Wróć do strony głównej</a>
-</body>
+    ?>
+    admin users adminusersadmin users admin <br/><br/>
 
+    <?php
+    if (isset($_SESSION['user_list'])) {
+        foreach ($_SESSION['user_list'] as $item => $cur) {
+            echo 'Id: ' . $cur['id'] . ' Imię: ' . $cur['name'] . ' Nazwisko: ' . $cur['lastname'] . ' ';
+            if (!$cur['is_admin']) {
+                echo '<form method="POST">';
+                echo '<input type="hidden" name="admin_privileges" value="' . $cur['id'] . '"/>';
+                echo '<button type="submit" class="btn btn-primary btn-sm">Give admin privileges</button>';
+                echo '</form>';
+
+                echo '<form method="POST">';
+                echo '<input type="hidden" name="delete_user" value="' . $cur['id'] . '"/>';
+                echo '<button type="submit" class="btn btn-primary btn-sm">Delete this user</button>';
+                echo '</form>';
+
+                echo '<form action="user_orders.php" method="POST">';
+                echo '<input type="hidden" name="user_id" value="' . $cur['id'] . '"/>';
+                echo '<button type="submit" class="btn btn-primary btn-sm">Change orders status</button>';
+                echo '</form>';
+            } else {
+                echo '<br />';
+                echo '<b>admin</b>';
+                echo '<br />';
+            }
+            echo '</br>';
+        }
+        unset($_SESSION['user_list']);
+    }
+    ?>
+    <br/><br/>
+    <a href="main.php">Wróć do strony głównej</a>
+
+</div>
+</body>
 
 </html>

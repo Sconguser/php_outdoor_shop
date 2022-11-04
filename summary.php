@@ -1,4 +1,5 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
 if (!isset($_SESSION['user_data']) || !isset($_SESSION['user_data']['basket'])) {
     $_SESSION['e_mainRedirect'] = "Coś poszło nie tak";
@@ -18,23 +19,32 @@ require_once "connect.php";
     <title>Podsumowanie</title>
 </head>
 <body>
-summary <br/><br/>
-<?php
+<div class="container">
+    <?php
+    if ($_SESSION['user_data']['is_admin']) {
+        require_once "admin_navbar.php";
+    } else {
+        require_once "navbar.php";
+    }
+    ?>
+    summary <br/><br/>
+    <?php
     $_SESSION['e_summaryRedirect'] = '';
     echo '<a href="edit_user_address.php"> Edytuj dane adresowe</a>';
     echo '<br />';
-    echo 'Cena: '.$_SESSION['user_data']['basket']['total_price'].'zł';
+    echo 'Cena: ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
     echo '<form action="order_made.php" method="post" name="order">';
-    echo  '<input type="submit" value="Zapłać i złóż zamówienie"/>';
+    echo '<input type="submit" value="Zapłać i złóż zamówienie"/>';
     echo '</form>';
     echo '<br/>';
-    if(isset($_SESSION['e_orderMade'])){
+    if (isset($_SESSION['e_orderMade'])) {
         echo $_SESSION['e_orderMade'];
         unset($_SESSION['e_orderMade']);
     }
-?>
-<br/><br/>
-<a href="main.php">Wróć do strony głównej</a>
+    ?>
+    <br/><br/>
+    <a href="main.php">Wróć do strony głównej</a>
+</div>
 </body>
 
 

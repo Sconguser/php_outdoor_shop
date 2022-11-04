@@ -1,4 +1,5 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
 
 if (isset($_POST['email'])) {
@@ -61,17 +62,17 @@ if (isset($_POST['email'])) {
                     $_SESSION['e_email'] = "Istnieje już konto o takim emailu";
                 } else {
                     if ($connection->query("INSERT INTO users VALUES(NULL, NULL, NULL, '$name',
-                         '$lastname', '$password_hash', '$email')")){
+                         '$lastname', '$password_hash', '$email')")) {
                         $result_new_user_id = $connection->query("SELECT id FROM users where email='$email'");
-                        $user_id =  $result_new_user_id->fetch_assoc()['id'];
+                        $user_id = $result_new_user_id->fetch_assoc()['id'];
                         $connection->query("INSERT INTO addresses VALUES(NULL, $user_id, '', '', '')");
                         $connection->query("INSERT INTO basket VALUES(NULL, $user_id, 0)");
                         $_SESSION['signup_success'] = true;
                         header('Location: success_signup.php');
-                    }else{
+                    } else {
                         throw new Exception("Nie udało się stworzyć nowego użytkownika");
                     }
-                    }
+                }
 
                 $connection->close();
             }
@@ -102,75 +103,76 @@ if (isset($_POST['email'])) {
     </style>
 </head>
 <body>
-<form method="POST">
-    Imię: <br/> <input type="text" value="<?php
-    if(isset($_SESSION['fr_name']))
-    {
-        echo $_SESSION['fr_name'];
-        unset($_SESSION['fr_name']);
-    }
-?>" name="name"/><br/>
-    <?php
-    if (isset($_SESSION['e_name'])) {
-        echo '<div class="error">' . $_SESSION['e_name'] . '</div>';
-        unset($_SESSION['e_name']);
-    }
-    ?>
-    Nazwisko: <br/> <input type="text" value="<?php
-    if(isset($_SESSION['fr_lastname']))
-    {
-        echo $_SESSION['fr_lastname'];
-        unset($_SESSION['fr_lastname']);
-    }
-    ?>" name="lastname"/><br/>
-    <?php
-    if (isset($_SESSION['e_lastname'])) {
-        echo '<div class="error">' . $_SESSION['e_lastname'] . '</div>';
-        unset($_SESSION['e_lastname']);
-    }
-    ?>
-    Email: <br/> <input type="text" value="<?php
-    if(isset($_SESSION['fr_email']))
-    {
-        echo $_SESSION['fr_email'];
-        unset($_SESSION['fr_email']);
-    }
-    ?>" name="email"/><br/>
-    <?php
-    if (isset($_SESSION['e_email'])) {
-        echo '<div class="error">' . $_SESSION['e_email'] . '</div>';
-        unset($_SESSION['e_email']);
-    }
-    ?>
-    Hasło: <br/> <input type="password"  name="password"/><br/>
-    <?php
-    if (isset($_SESSION['e_password'])) {
-        echo '<div class="error">' . $_SESSION['e_password'] . '</div>';
-        unset($_SESSION['e_password']);
-    }
-    ?>
-    Powtórz hasło: <br/> <input type="password"  name="passwordConfirmation"/><br/>
-    <?php
-    if (isset($_SESSION['e_passwordConfirmation'])) {
-        echo '<div class="error">' . $_SESSION['e_passwordConfirmation'] . '</div>';
-        unset($_SESSION['e_passwordConfirmation']);
-    }
-    ?>
-    <label>
-        <input type="checkbox" name="termsOfService"/> Akceptuję regulamin
-    </label>
-    <?php
-    if (isset($_SESSION['e_termsOfService'])) {
-        echo '<div class="error">' . $_SESSION['e_termsOfService'] . '</div>';
-        unset($_SESSION['e_termsOfService']);
-    }
-    ?>
-    <br/>
-    <!-- <div class="g-recaptcha" data-sitekey="6LdT_KQiAAAAALNrfA3pdp7bdIlXNbDZhCw7nKgP" data-action="REGISTER"></div> -->
-    <input type="submit" value="Zarejestruj się"/>
-    <br/>
-    <a href="index.php">Wróć na stronę logowania</a>
-</form>
+<div class="container">
+    <form method="POST">
+        Imię: <br/> <input type="text" value="<?php
+        if (isset($_SESSION['fr_name'])) {
+            echo $_SESSION['fr_name'];
+            unset($_SESSION['fr_name']);
+        }
+        ?>" name="name"/><br/>
+        <?php
+        if (isset($_SESSION['e_name'])) {
+            echo '<div class="error">' . $_SESSION['e_name'] . '</div>';
+            unset($_SESSION['e_name']);
+        }
+        ?>
+        Nazwisko: <br/> <input type="text" value="<?php
+        if (isset($_SESSION['fr_lastname'])) {
+            echo $_SESSION['fr_lastname'];
+            unset($_SESSION['fr_lastname']);
+        }
+        ?>" name="lastname"/><br/>
+        <?php
+        if (isset($_SESSION['e_lastname'])) {
+            echo '<div class="error">' . $_SESSION['e_lastname'] . '</div>';
+            unset($_SESSION['e_lastname']);
+        }
+        ?>
+        Email: <br/> <input type="text" value="<?php
+        if (isset($_SESSION['fr_email'])) {
+            echo $_SESSION['fr_email'];
+            unset($_SESSION['fr_email']);
+        }
+        ?>" name="email"/><br/>
+        <?php
+        if (isset($_SESSION['e_email'])) {
+            echo '<div class="error">' . $_SESSION['e_email'] . '</div>';
+            unset($_SESSION['e_email']);
+        }
+        ?>
+        Hasło: <br/> <input type="password" name="password"/><br/>
+        <?php
+        if (isset($_SESSION['e_password'])) {
+            echo '<div class="error">' . $_SESSION['e_password'] . '</div>';
+            unset($_SESSION['e_password']);
+        }
+        ?>
+        Powtórz hasło: <br/> <input type="password" name="passwordConfirmation"/><br/>
+        <?php
+        if (isset($_SESSION['e_passwordConfirmation'])) {
+            echo '<div class="error">' . $_SESSION['e_passwordConfirmation'] . '</div>';
+            unset($_SESSION['e_passwordConfirmation']);
+        }
+        ?>
+        <label>
+            <input type="checkbox" name="termsOfService"/> Akceptuję regulamin
+        </label>
+        <?php
+        if (isset($_SESSION['e_termsOfService'])) {
+            echo '<div class="error">' . $_SESSION['e_termsOfService'] . '</div>';
+            unset($_SESSION['e_termsOfService']);
+        }
+        ?>
+        <br/>
+        <!-- <div class="g-recaptcha" data-sitekey="6LdT_KQiAAAAALNrfA3pdp7bdIlXNbDZhCw7nKgP" data-action="REGISTER"></div> -->
+<!--        <input type="submit" value="Zarejestruj się"/>-->
+<!--        -->
+        <button type="submit" class="btn btn-primary btn-sm">Zarejestruj się</button>
+        <br/>
+        <a href="index.php">Wróć na stronę logowania</a>
+    </form>
+</div>
 </body>
 
 </html>
