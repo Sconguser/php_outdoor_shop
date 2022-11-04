@@ -34,6 +34,10 @@
         echo '<p>'.$_SESSION['e_mainRedirect'].'</p>';
         unset($_SESSION['e_mainRedirect']);
     }
+    if(isset($_SESSION['e_summaryRedirect']))
+    {
+        unset($_SESSION['e_summaryRedirect']);
+    }
     ?>
 
 </body>

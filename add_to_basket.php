@@ -19,6 +19,7 @@
                     $item = $connection->query("SELECT * FROM items WHERE id=$item_id")->fetch_assoc();
                     $total_price = $total_price + ($item['price']*$quantity);
                     $connection->query("UPDATE basket SET total_price=$total_price WHERE id=$basket_id");
+                    $_SESSION['user_data']['basket']['total_price'] = $total_price;
                     $_SESSION['e_addToBasket'] = "Dodano produkt do koszyka";
                     header('Location:shop.php');
                 }else {
@@ -29,7 +30,6 @@
                 header('Location:shop.php');
             }
         }
+        $connection->close();
     }
-
-
 ?>

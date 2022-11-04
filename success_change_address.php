@@ -18,7 +18,7 @@ else{
 </head>
 <body> <br/><br/>
     Zmiana adresu przebiegła pomyślnie.
-    <a href="index.php">Wróć na stronę główną</a>
+    <a href="edit_user_address.php">Wróć</a>
     <br/>
 </form>
 </body>

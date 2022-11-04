@@ -69,9 +69,13 @@ if(!isset($_SESSION['user_address'])) {
 <body>
 
 <?php
-echo '<a href="main.php">Wróć na stronę główną</a>';
-echo '<br />';
-echo '<a href="edit_user_info.php">Wróć</a>';
+if(isset($_SESSION['e_summaryRedirect']))
+{
+    echo '<a href="summary.php">Wróć</a>';
+}
+else{
+    echo '<a href="edit_user_info.php">Wróć</a>';
+}
 ?>
 <form method="POST">
     Miasto: <input type="text" value="<?php

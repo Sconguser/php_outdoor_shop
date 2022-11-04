@@ -31,6 +31,8 @@ if (!isset($_SESSION['category_list'])) {
             echo "<p>" . $e . "</p>";
         }
     }
+    $connection->close();
+
 }
 /// get product list
 if (!isset($_SESSION['product_list'])) {
@@ -57,6 +59,7 @@ if (!isset($_SESSION['product_list'])) {
             echo "<p>" . $e . "</p>";
         }
     }
+    $connection->close();
 }
 if (isset($_POST['chosen_category']) && $_POST['chosen_category']!=-1) {
     $connection = @new mysqli($host, $db_user, $db_password, $db_name);
@@ -84,6 +87,7 @@ if (isset($_POST['chosen_category']) && $_POST['chosen_category']!=-1) {
             echo "<p>" . $e . "</p>";
         }
     }
+    $connection->close();
 }
 
 
@@ -113,7 +117,7 @@ if (isset($_SESSION['category_list'])) {
 if (isset($_SESSION['product_list'])) {
     foreach ($_SESSION['product_list'] as $item => $cur) {
         echo '<form method="POST" action="add_to_basket.php">';
-        echo 'Id: ' . $cur['id'] . ' Nazwa: ' . $cur['name'] . ' Cena: ' . $cur['price'] . ' ';
+        echo 'Id: ' . $cur['id'] . ' Nazwa: ' . $cur['name'] . ' Cena: ' . $cur['price'] . ' Ilość: ' . $cur['quantity'] . ' ';
         echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';
         echo '</br>';
         echo 'Ilość:<input type="number" name="quantity"/>';
