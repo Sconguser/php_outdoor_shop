@@ -94,12 +94,14 @@ if (isset($_POST['order_status'])) {
                 echo '</form>';
 //                echo '<br/>';
             } else {
+                echo '<div class = "card">';
                 echo 'Cena: ' . $cur['price'].'zł' ;
                 echo '<br/>';
                 echo 'Data zamówienia: ' . $cur['date_of_order'];
                 echo '<br/>';
                 echo 'Status: ' . $cur['order_status'];
                 echo '<input type="hidden" name="order_id" value="' . $cur['id'] . '"/>';
+//                echo '</div>';
 //                echo '<br/>';
             }
             echo '</div>';

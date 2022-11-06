@@ -130,8 +130,7 @@ if (isset($_POST['chosen_category']) && $_POST['chosen_category'] != -1) {
             echo '<option value="' . $cur['id'] . '">' . $cur['category_name'] . '</option>';
         }
         echo '</select>';
-//        echo '<input type="submit" value="Wyszukaj po kategorii" />';
-        echo '<button type="submit" class="btn btn-primary btn-sm">Wyszukaj według kategorii</button>';
+        echo '<button type="submit" class="btn btn-primary btn-sm">Filtruj</button>';
         echo '</form>';
         unset($_SESSION['category_list']);
     }

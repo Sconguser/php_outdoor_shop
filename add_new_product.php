@@ -76,7 +76,8 @@ if (!isset($_SESSION['category_list'])) {
         require_once "navbar.php";
     }
     ?>
-    Dodaj nowy produkt dodaj nowy produkt <br/> <br/>
+    <b>Panel administratora - dodawanie nowego produktu</b>
+    <br/> <br/>
     Kategoria:
     <?php
     if (isset($_SESSION['category_list'])) {
@@ -94,14 +95,11 @@ if (!isset($_SESSION['category_list'])) {
         echo '<br />';
         echo 'Cena: <br /><input type="number" step="0.01" name="price"/>';
         echo '<br />';
-//        echo '<input type="submit" value="Dodaj nowy produkt" />';
         echo '<button type="submit" class="btn btn-primary btn-sm">Dodaj nowy produkt</button>';
         echo '</form>';
         unset($_SESSION['category_list']);
     }
     ?>
-    <br/><br/>
-    <a href="main.php">Wróć do strony głównej</a>
 </div>
 </body>
 </html>

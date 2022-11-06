@@ -1,7 +1,7 @@
 <!--<nav class="navbar navbar-expand-lg bg-light" style="background-color: green">-->
 <nav class="navbar navbar-expand navbar-light" style="background-color: greenyellow;">
     <div class ="container-fluid">
-        <a class="navbar-brand" href="main.php">Sklep turystyczny</a>
+        <a class="navbar-brand" href="main.php">Minimalistyczny Sklep turystyczny - Admin</a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

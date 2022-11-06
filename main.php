@@ -24,7 +24,6 @@ if (!isset($_SESSION['logged_in'])) {
     //        header("Location:shop.php");
     ?>
     <?php
-    echo "<p>Hej " . $_SESSION['user_data']['name'] . "!";
     if (isset($_SESSION['e_mainRedirect'])) {
         echo '<p>' . $_SESSION['e_mainRedirect'] . '</p>';
         unset($_SESSION['e_mainRedirect']);
@@ -38,8 +37,11 @@ if (!isset($_SESSION['logged_in'])) {
     }
     ?>
     <div class="container">
-        <p>Witamy na stronie Sklepu Turystycznego.</p>
-        <p>Znajdziesz tutaj sprzęt turystyczny i tylko to.</p>
+        <?php
+        echo "<p><b>Hej " . $_SESSION['user_data']['name'] . "!</b></p>";
+        ?>
+        <p>Witamy na stronie Minimalistycznego Sklepu Turystycznego.</p>
+        <p>Znajdziesz tutaj sprzęt turystyczny i tylko to. W minimalistycznym stylu.</p>
     </div>
 </div>
 </body>

@@ -22,7 +22,8 @@ if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
         require_once "navbar.php";
     }
     ?>
-    admin admin admin admin <br/><br/>
+    <b>Panel administratora</b>
+    <br/><br/>
 
     <a href="admin_manage_users.php">Zarządzaj użytkownikami</a>
     <br/>

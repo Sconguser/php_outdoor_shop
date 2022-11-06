@@ -94,31 +94,37 @@ if (!isset($_SESSION['user_list'])) {
         require_once "navbar.php";
     }
     ?>
-    admin users adminusersadmin users admin <br/><br/>
+    <b>Panel administratora - zarządzanie użytkownikami</b>
+    <br/><br/>
 
     <?php
     if (isset($_SESSION['user_list'])) {
         foreach ($_SESSION['user_list'] as $item => $cur) {
             echo '<div class = "card" style="padding: 10px;">';
-            echo 'Id: ' . $cur['id'] . ' Imię: ' . $cur['name'] . ' Nazwisko: ' . $cur['lastname'] . ' ';
+            echo 'Id: ' . $cur['id'];
+            echo '<br/>';
+            echo 'Imię: ' . $cur['name'];
+            echo '<br/>';
+            echo 'Nazwisko: ' . $cur['lastname'];
+            echo '<br/>';
             if (!$cur['is_admin']) {
                 echo '<form method="POST">';
                 echo '<input type="hidden" name="admin_privileges" value="' . $cur['id'] . '"/>';
-                echo '<button type="submit" class="btn btn-primary btn-sm">Give admin privileges</button>';
+                echo '<button type="submit" class="btn btn-primary btn-sm">Nadaj uprawnienia adminsitratora</button>';
                 echo '</form>';
 
                 echo '<form method="POST">';
                 echo '<input type="hidden" name="delete_user" value="' . $cur['id'] . '"/>';
-                echo '<button type="submit" class="btn btn-primary btn-sm">Delete this user</button>';
+                echo '<button type="submit" class="btn btn-primary btn-sm">Usuń tego użytkownika</button>';
                 echo '</form>';
 
                 echo '<form action="user_orders.php" method="POST">';
                 echo '<input type="hidden" name="user_id" value="' . $cur['id'] . '"/>';
-                echo '<button type="submit" class="btn btn-primary btn-sm">Change orders status</button>';
+                echo '<button type="submit" class="btn btn-primary btn-sm">Zarządzaj statusem zamówień</button>';
                 echo '</form>';
             } else {
-                echo '<br />';
-                echo '<b>admin</b>';
+//                echo '<br />';
+                echo '<b>Administrator</b>';
                 echo '<br />';
             }
             echo '</div>';
@@ -127,8 +133,8 @@ if (!isset($_SESSION['user_list'])) {
         unset($_SESSION['user_list']);
     }
     ?>
-    <br/><br/>
-    <a href="main.php">Wróć do strony głównej</a>
+<!--    <br/><br/>-->
+<!--    <a href="main.php">Wróć do strony głównej</a>-->
 
 </div>
 </body>

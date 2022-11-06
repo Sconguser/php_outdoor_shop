@@ -23,7 +23,7 @@ if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
     }
     ?>
 
-    admin products admin admin admin
+    <b>Panel administratora - zarządzanie produktami</b>
     <br/><br/>
 
     <a href="add_new_category.php">Dodaj nową kategorię produktu</a>

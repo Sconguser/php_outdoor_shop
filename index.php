@@ -16,7 +16,12 @@ if (isset($_SESSION['logged_in']) && ($_SESSION['logged_in'])) {
 </head>
 <body>
 <div class="container">
-    Zaloguj się:<br/><br/>
+
+    <?php
+    require_once "noauthnavbar.php";
+    ?>
+    <b>Zaloguj się:</b>
+    <br/>
 
     <form action="login.php" method="post">
         Login:<br/> <input type="text" name="login"/> <br/>

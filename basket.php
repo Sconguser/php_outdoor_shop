@@ -83,7 +83,8 @@ $connection->close();
         require_once "navbar.php";
     }
     ?>
-    basket <br/><br/>
+    <b>Koszyk</b>
+    <br/><br/>
 
     <?php
     if (isset($_SESSION['basket_item_list'])) {
@@ -107,7 +108,9 @@ $connection->close();
         echo '<a class="btn btn-primary btn-sm" href="summary.php" role="button">Przejdź do podsumowania</a>';
         unset($_SESSION['basket_item_list']);
     } else {
-        echo 'Koszyk jest pusty';
+        echo '<b>Koszyk jest pusty</b>';
+        echo '</br>';
+        echo '<a class="btn btn-primary btn-sm" href="shop.php" role="button">Idź do sklepu</a>';
     }
     ?>
     <br/><br/>

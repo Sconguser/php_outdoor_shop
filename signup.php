@@ -104,6 +104,9 @@ if (isset($_POST['email'])) {
 </head>
 <body>
 <div class="container">
+    <?php
+    require_once "noauthnavbar.php";
+    ?>
     <form method="POST">
         Imię: <br/> <input type="text" value="<?php
         if (isset($_SESSION['fr_name'])) {

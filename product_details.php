@@ -159,7 +159,6 @@ function commentSection(): void
         echo userIdToNameAndLastName($cur['user_id'], $cur['is_anonym']);
         echo '<br/>';
         echo '<h1 style="font-size: 10px" >' . $cur['date'] . '</h1>';
-        echo '</br>';
         echo 'Ocena: ';
         echo ratingToString($cur['rating']);
         echo '<br/>';
@@ -221,6 +220,7 @@ function commentPart($item_id)
     if (isset($_SESSION['focused_product'])) {
         productInfoSection($_SESSION['focused_product']);
         buySection($_SESSION['focused_product']);
+        echo showProductImage($_SESSION['focused_product']['id']);
         commentPart($_SESSION['focused_product']['id']);
         unset($_SESSION['focused_product']);
     }

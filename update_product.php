@@ -69,6 +69,9 @@ if (isset($_POST['product_id'])) {
     } else {
         require_once "navbar.php";
     }
+       ?>
+    <b>Panel administratora - edycja produktu</b>
+    <?php
     if (isset($_SESSION['product_list'])) {
         echo '<form method="POST">';
         echo 'Nazwa towaru: <select name="product_id">';
