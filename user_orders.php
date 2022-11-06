@@ -64,13 +64,16 @@ if (isset($_POST['order_status'])) {
         require_once "navbar.php";
     }
     ?>
-    orderorder <br/><br/>
+    <b>Historia zamówień:</b>
+    <br/>
+    <br/>
 
     <?php
     if (isset($_SESSION['user_orders'])) {
         foreach ($_SESSION['user_orders'] as $item => $cur) {
             $defaultStatus = $cur['order_status'];
             if ($_SESSION['user_data']['is_admin']) {
+                echo '<div class="card">';
                 echo '<form method="POST">';
                 echo '<select name="order_status">';
                 echo ' <option value=' . $defaultStatus . '>' . $defaultStatus . '</option>';
@@ -79,17 +82,27 @@ if (isset($_POST['order_status'])) {
                 echo ' <option value="Zwrócone">Zwrócone</option>';
                 echo '</select>';
                 echo '<br/>';
-                echo 'Id: ' . $cur['id'] . ' Price: ' . $cur['price'] . ' Date: ' . $cur['date_of_order'] . ' ' . 'Status: ' . $cur['order_status'];
+                echo 'Cena: ' . $cur['price'].'zł' ;
+                echo '<br/>';
+                echo 'Data zamówienia: ' . $cur['date_of_order'];
+                echo '<br/>';
+                echo 'Status: ' . $cur['order_status'];
                 echo '<input type="hidden" name="order_id" value="' . $cur['id'] . '"/>';
                 echo '<br/>';
 //                echo '<input type="submit" value="Zmień status zamówienia" />';
                 echo '<button type="submit" class="btn btn-primary btn-sm">Zmień status zamówienia</button>';
                 echo '</form>';
-                echo '<br/>';
+//                echo '<br/>';
             } else {
-                echo 'Id: ' . $cur['id'] . ' Price: ' . $cur['price'] . ' Date: ' . $cur['date_of_order'] . ' ' . 'Status: ' . $cur['order_status'];
+                echo 'Cena: ' . $cur['price'].'zł' ;
                 echo '<br/>';
+                echo 'Data zamówienia: ' . $cur['date_of_order'];
+                echo '<br/>';
+                echo 'Status: ' . $cur['order_status'];
+                echo '<input type="hidden" name="order_id" value="' . $cur['id'] . '"/>';
+//                echo '<br/>';
             }
+            echo '</div>';
         }
         echo '<br/>';
         unset($_SESSION['user_orders']);
@@ -102,7 +115,6 @@ if (isset($_POST['order_status'])) {
     }
     ?>
     <br/><br/>
-<!--    <a href="main.php">Wróć do strony głównej</a>-->
 </div>
 </body>
 

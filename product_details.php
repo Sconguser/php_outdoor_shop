@@ -7,39 +7,27 @@ session_start();
 if (!isset($_SESSION['user_data']) || !isset($_POST['item_id'])) {
     header('Location: shop.php');
     exit();
-} else {
-    $connection = @new mysqli($host, $db_user, $db_password, $db_name);
-    if ($connection->connect_errno != 0 && $debug == 1) {
-        echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
-    } else {
-        $item_id = $_POST['item_id'];
-        try {
-            if ($result = $connection->query("SELECT * FROM items where id=$item_id")) {
-                if ($result->num_rows <= 0) {
-                    throw new Exception('Nie ma takiego produktu, coś poszło nie tak');
-                } else {
-                    $_SESSION['focused_product'] = $result->fetch_assoc();
-                    $result = $connection->query("SELECT * FROM comments WHERE item_id = $item_id");
-                    if ($result->num_rows > 0) {
-                        $int = 0;
-                        while ($comment = $result->fetch_assoc()) {
-                            $_SESSION['comments'][$comment['id']] = $comment;
-                            $int++;
-                        }
-                    } else {
-                        $_SESSION['e_comments'] = 'Nie ma żadnych komentarzy do tego produktu';
-                    }
-                }
-            }
-        } catch (Exception $e) {
-            $_SESSION['e_productDetails'] = $e;
-            $connection->close();
-            header('Location:shop.php');
-        }
-    }
-    $connection->close();
 }
-
+$connection = @new mysqli($host, $db_user, $db_password, $db_name);
+if ($connection->connect_errno != 0 && $debug == 1) {
+    echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
+} else {
+    $item_id = $_POST['item_id'];
+    try {
+        if ($result = $connection->query("SELECT * FROM items where id=$item_id")) {
+            if ($result->num_rows <= 0) {
+                throw new Exception('Nie ma takiego produktu, coś poszło nie tak');
+            } else {
+                $_SESSION['focused_product'] = $result->fetch_assoc();
+            }
+        }
+    } catch (Exception $e) {
+        $_SESSION['e_productDetails'] = $e;
+        $connection->close();
+        header('Location:shop.php');
+    }
+}
+$connection->close();
 if (isset($_POST['comment'])) {
     $connection = @new mysqli($host, $db_user, $db_password, $db_name);
     if ($connection->connect_errno != 0 && $debug == 1) {
@@ -53,7 +41,7 @@ if (isset($_POST['comment'])) {
             $rating = $_POST['rating'];
             $anonym = 0;
             if (isset($_POST['anonym'])) {
-                $anonym = true;
+                $anonym = 1;
             }
             $item_id = $_SESSION['focused_product']['id'];
             try {
@@ -91,6 +79,31 @@ if (isset($_POST['delete_comment_id'])) {
 }
 
 
+$connection = @new mysqli($host, $db_user, $db_password, $db_name);
+if ($connection->connect_errno != 0 && $debug == 1) {
+    echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
+} else {
+    $item_id = $_POST['item_id'];
+    try {
+        $result = $connection->query("SELECT * FROM comments WHERE item_id = $item_id");
+        if ($result->num_rows > 0) {
+            $int = 0;
+            while ($comment = $result->fetch_assoc()) {
+                $_SESSION['comments'][$comment['id']] = $comment;
+                $int++;
+            }
+        } else {
+            $_SESSION['e_comments'] = 'Nie ma żadnych komentarzy do tego produktu';
+        }
+    } catch (Exception $e) {
+        $_SESSION['e_productDetails'] = $e;
+        $connection->close();
+        header('Location:shop.php');
+    }
+}
+$connection->close();
+
+
 function commentField($item_id)
 {
     echo '<form method="POST">';
@@ -106,7 +119,7 @@ function commentField($item_id)
     echo '</textarea>';
     echo '<br/>';
     echo '<label>';
-    echo '<input type="checkbox" name="anonym"/>' . 'Komentuj jako anonim';
+    echo '<input type="checkbox" name="anonym" value=0/>' . 'Komentuj jako anonim';
     echo '</label>';
     echo '<input type="hidden" name="item_id" value="' . $item_id . '"/>';
     echo '<br/>';
@@ -147,6 +160,9 @@ function commentSection(): void
         echo '<br/>';
         echo '<h1 style="font-size: 10px" >' . $cur['date'] . '</h1>';
         echo '</br>';
+        echo 'Ocena: ';
+        echo ratingToString($cur['rating']);
+        echo '<br/>';
         echo $cur['comment'];
         echo '</br>';
         if ($_SESSION['user_data']['is_admin']) {
@@ -164,6 +180,8 @@ function commentPart($item_id)
     if (isset($_SESSION['comments'])) {
         commentSection();
         unset($_SESSION['comments']);
+    } else {
+        echo 'Narazie brak komentarzy';
     }
     echo '<br/>';
     commentField($item_id);
@@ -199,7 +217,6 @@ function commentPart($item_id)
         showAlert($_SESSION['e_deleteComment']);
         unset($_SESSION['e_deleteComment']);
     }
-
 
     if (isset($_SESSION['focused_product'])) {
         productInfoSection($_SESSION['focused_product']);

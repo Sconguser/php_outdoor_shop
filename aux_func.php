@@ -45,4 +45,21 @@ function productInfoSection($product): void
     echo '<br/>';
     echo 'Dostępność: ' . availabitiy($product['quantity']);
 }
+
+function ratingToString($rating){
+    switch($rating){
+        case 1:
+            return "1 gwiazdka";
+        case 2:
+            return "2 gwiazdki";
+        case 3:
+            return "3 gwiazdki";
+        case 4:
+            return "4 gwiazdki";
+        case 5:
+            return "5 gwiazdek";
+    }
+    return "Nie wiadomo :/";
+}
+
 ?>
