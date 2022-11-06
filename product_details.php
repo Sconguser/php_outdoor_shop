@@ -218,9 +218,15 @@ function commentPart($item_id)
     }
 
     if (isset($_SESSION['focused_product'])) {
+        echo '<div class = "row">';
+        echo '<div class ="col-sm">';
         productInfoSection($_SESSION['focused_product']);
         buySection($_SESSION['focused_product']);
+        echo '</div>';
+        echo '<div class ="col-sm">';
         echo showProductImage($_SESSION['focused_product']['id']);
+        echo '</div>';
+        echo '</div>';
         commentPart($_SESSION['focused_product']['id']);
         unset($_SESSION['focused_product']);
     }

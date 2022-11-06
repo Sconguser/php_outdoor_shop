@@ -139,12 +139,20 @@ if (isset($_POST['chosen_category']) && $_POST['chosen_category'] != -1) {
     if (isset($_SESSION['product_list'])) {
         foreach ($_SESSION['product_list'] as $item => $cur) {
             echo '<div class="card">';
+            echo '<div class ="row">';
+            echo '<div class="col-sm">';
             productInfoSection($cur);
             buySection($cur);
             echo '<form action="product_details.php" method="POST">';
             echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';
             echo '<button type="submit" class="btn btn-primary btn-sm">Szczegóły produktu</button>';
             echo '</form>';
+            echo '</div>';
+            echo '<div class="col-sm">';
+            echo showProductThumb($cur['id']);
+            echo '</div>';
+            echo '</div>';
+            echo '<br/>';
             echo '</div>';
             echo '<br/>';
         }

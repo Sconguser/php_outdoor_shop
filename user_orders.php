@@ -6,6 +6,23 @@ $connection = @new mysqli($host, $db_user, $db_password, $db_name);
 if ($connection->connect_errno != 0 && $debug == 1) {
     echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
 } else {
+    if (isset($_POST['order_status'])) {
+        $connection = @new mysqli($host, $db_user, $db_password, $db_name);
+        if ($connection->connect_errno != 0 && $debug == 1) {
+            echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
+        } else {
+            try {
+                $order_id = $_POST['order_id'];
+                $order_status = $_POST['order_status'];
+//            echo $order_id;
+//            exit();
+                $result = $connection->query("UPDATE orders SET order_status = '$order_status' WHERE id=$order_id");
+//            header("Location: admin_manage_users.php");
+            } catch (Exception $e) {
+                $_SESSION['e_ChangeOrderStatus'] = $e;
+            }
+        }
+    }
     try {
         $user_id = $_SESSION['user_data']['id'];
         if (isset($_POST['user_id'])) {
@@ -29,23 +46,7 @@ if ($connection->connect_errno != 0 && $debug == 1) {
     $connection->close();
 }
 
-if (isset($_POST['order_status'])) {
-    $connection = @new mysqli($host, $db_user, $db_password, $db_name);
-    if ($connection->connect_errno != 0 && $debug == 1) {
-        echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
-    } else {
-        try {
-            $order_id = $_POST['order_id'];
-            $order_status = $_POST['order_status'];
-//            echo $order_id;
-//            exit();
-            $result = $connection->query("UPDATE orders SET order_status = '$order_status' WHERE id=$order_id");
-            header("Location: admin_manage_users.php");
-        } catch (Exception $e) {
-            $_SESSION['e_ChangeOrderStatus'] = $e;
-        }
-    }
-}
+
 ?>
 
 <!DOCTYPE HTML>
@@ -82,15 +83,16 @@ if (isset($_POST['order_status'])) {
                 echo ' <option value="Zwrócone">Zwrócone</option>';
                 echo '</select>';
                 echo '<br/>';
+                echo '<button type="submit" class="btn btn-primary btn-sm">Zmień status zamówienia</button>';
+                echo '<br/>';
+                echo 'Id zamówienia: '.$cur['id'];
+                echo '<br/>';
                 echo 'Cena: ' . $cur['price'].'zł' ;
                 echo '<br/>';
                 echo 'Data zamówienia: ' . $cur['date_of_order'];
                 echo '<br/>';
                 echo 'Status: ' . $cur['order_status'];
                 echo '<input type="hidden" name="order_id" value="' . $cur['id'] . '"/>';
-                echo '<br/>';
-//                echo '<input type="submit" value="Zmień status zamówienia" />';
-                echo '<button type="submit" class="btn btn-primary btn-sm">Zmień status zamówienia</button>';
                 echo '</form>';
 //                echo '<br/>';
             } else {

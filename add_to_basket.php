@@ -1,6 +1,8 @@
 <?php
     session_start();
     require_once "connect.php";
+    require_once "db_converters.php";
+
     if(!isset($_SESSION['user_data']) || !isset($_POST['item_id']) || !isset($_POST['quantity'])){
         $_SESSION['e_addToBasket'] = 'Coś poszło nie tak';
         header('Location:shop.php');
@@ -23,7 +25,7 @@
                     exit();
                 }
                 if ($result = $connection->query("INSERT INTO basket_items VALUES (NULL, $basket_id, $item_id, $quantity)")) {
-                    $total_price = $_SESSION['user_data']['basket']['total_price'];
+                    $total_price = getTotalPrice($_SESSION['user_data']['basket']['id']);
                     $item = $connection->query("SELECT * FROM items WHERE id=$item_id")->fetch_assoc();
                     $total_price = $total_price + ($item['price']*$quantity);
                     $connection->query("UPDATE basket SET total_price=$total_price WHERE id=$basket_id");

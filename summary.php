@@ -27,7 +27,8 @@ require_once "connect.php";
         require_once "navbar.php";
     }
     ?>
-    summary <br/><br/>
+    <b>Podsumowanie zamówienia:</b>
+    <br/><br/>
     <?php
     $_SESSION['e_summaryRedirect'] = '';
     echo 'Cena: ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';

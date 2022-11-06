@@ -1,6 +1,7 @@
 <?php
 require_once "bootstrap_include.php";
 require_once "db_converters.php";
+require_once "aux_func.php";
 session_start();
 if (!isset($_SESSION['user_data']) || !isset($_SESSION['user_data']['basket'])) {
     $_SESSION['e_mainRedirect'] = "Coś poszło nie tak";
@@ -20,6 +21,9 @@ function getBasketItems(mysqli $connection, int $debug): void
         echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
     } else {
         try {
+            if(isset($_SESSION['basket_item_list'])){
+                unset($_SESSION['basket_item_list']);
+            }
             $basket_id = $_SESSION['user_data']['basket']['id'];
             if ($result = $connection->query("SELECT * FROM basket_items WHERE basket_id = $basket_id")) {
                 if ($result->num_rows > 0) {
@@ -90,15 +94,22 @@ $connection->close();
     if (isset($_SESSION['basket_item_list'])) {
         foreach ($_SESSION['basket_item_list'] as $item => $cur) {
             echo '<div class="card">';
-            echo productIdToName($cur['item_id']);
-            echo '<br />';
-            echo  'Ilość: ' . $cur['amount'] ;
-            echo '<form method="POST">';
-            echo '<input type="hidden" name="basket_item_id" value="' . $cur['id'] . '"/>';
-            echo '<input type="hidden" name="item_id" value="' . $cur['item_id'] . '"/>';
-            echo '<input type="hidden" name="item_quantity" value="' . $cur['amount'] . '"/>';
-            echo '<button type="submit" class="btn btn-primary btn-sm">Usuń</button>';
-            echo '</form>';
+                echo '<div class="row">';
+                    echo '<div class="col-sm">';
+                        echo productIdToName($cur['item_id']);
+                        echo '<br />';
+                        echo  'Ilość: ' . $cur['amount'] ;
+                        echo '<form method="POST">';
+                        echo '<input type="hidden" name="basket_item_id" value="' . $cur['id'] . '"/>';
+                        echo '<input type="hidden" name="item_id" value="' . $cur['item_id'] . '"/>';
+                        echo '<input type="hidden" name="item_quantity" value="' . $cur['amount'] . '"/>';
+                        echo '<button type="submit" class="btn btn-primary btn-sm">Usuń</button>';
+                        echo '</form>';
+                    echo '</div>';
+                    echo '<div class="col-sm">';
+                        echo showProductThumb($cur['item_id']);
+                    echo '</div>';
+                echo '</div>';
             echo '</div>';
             echo '<br/>';
         }
@@ -106,7 +117,6 @@ $connection->close();
         echo 'Cena: ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
         echo '<br/>';
         echo '<a class="btn btn-primary btn-sm" href="summary.php" role="button">Przejdź do podsumowania</a>';
-        unset($_SESSION['basket_item_list']);
     } else {
         echo '<b>Koszyk jest pusty</b>';
         echo '</br>';

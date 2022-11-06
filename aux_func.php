@@ -62,6 +62,10 @@ function ratingToString($rating){
     return "Nie wiadomo :/";
 }
 function showProductImage($product_id){
-    return '<img src="images/'.$product_id.'.jpg" alt="Product image"/>';
+    return '<img src="images/'.$product_id.'.jpg" alt="Product image" width="500" height="400"/>';
+}
+
+function showProductThumb($product_id){
+    return '<img src="images/'.$product_id.'.jpg" alt="Product image" width="250" height="200"/>';
 }
 ?>
