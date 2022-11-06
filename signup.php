@@ -52,17 +52,24 @@ if (isset($_POST['email'])) {
             if ($connection->connect_errno != 0) {
                 throw new Exception(mysqli_connect_errno());
             } else {
+                $email = htmlentities($email, ENT_QUOTES, "UTF-8");
+                $name = htmlentities($name, ENT_QUOTES, "UTF-8");
+                $lastname = htmlentities($lastname, ENT_QUOTES, "UTF-8");
 
-                $result = $connection->query("SELECT id FROM users WHERE email='$email'");
-//                    echo $result->num_rows;
+                $result = @$connection->query(sprintf("SELECT id FROM users WHERE email='%s'",
+                mysqli_real_escape_string($connection, $email)));
                 if (!$result) throw new Exception($connection->error);
                 $how_many_emails = $result->num_rows;
                 if ($how_many_emails > 0) {
                     $successfulRegistration = false;
                     $_SESSION['e_email'] = "Istnieje już konto o takim emailu";
                 } else {
-                    if ($connection->query("INSERT INTO users VALUES(NULL, NULL, NULL, '$name',
-                         '$lastname', '$password_hash', '$email')")) {
+                    if ($connection->query(sprintf("INSERT INTO users VALUES(NULL, NULL, NULL, '%s',
+                         '%s', '%s', '%s')",
+                        mysqli_real_escape_string($connection, $name),
+                        mysqli_real_escape_string($connection, $lastname),
+                        mysqli_real_escape_string($connection, $password_hash),
+                        mysqli_real_escape_string($connection, $email)))) {
                         $result_new_user_id = $connection->query("SELECT id FROM users where email='$email'");
                         $user_id = $result_new_user_id->fetch_assoc()['id'];
                         $connection->query("INSERT INTO addresses VALUES(NULL, $user_id, '', '', '')");
@@ -107,6 +114,7 @@ if (isset($_POST['email'])) {
     <?php
     require_once "noauthnavbar.php";
     ?>
+    <b>Zarejestruj się:</b>
     <form method="POST">
         Imię: <br/> <input type="text" value="<?php
         if (isset($_SESSION['fr_name'])) {

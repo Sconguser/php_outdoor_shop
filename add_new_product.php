@@ -17,7 +17,10 @@ if (isset($_POST['name'])) {
         if ($connection->connect_errno != 0 && $debug == 1) {
             echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
         } else {
-            if ($result = $connection->query("INSERT INTO items VALUES (NULL, $quantity, $category, '$name', $price)")) {
+            $name = htmlentities($name, ENT_QUOTES, "UTF-8");
+
+            if ($result = $connection->query(sprintf("INSERT INTO items VALUES (NULL,'%d', '%d', '%s', '%f')",
+            $quantity, $category,  mysqli_real_escape_string($connection, $name), $price))) {
                 unset($_POST['name']);
                 unset($_POST['category']);
                 unset($_POST['quantity']);

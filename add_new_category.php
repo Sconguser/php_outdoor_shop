@@ -14,7 +14,9 @@ if (isset($_POST['category_name']) && strlen($_POST['category_name']) > 1) {
     } else {
         $category_name = $_POST['category_name'];
         try {
-            if ($result = $connection->query("INSERT INTO product_categories VALUES (NULL, '$category_name')")) {
+            $category_name = htmlentities($category_name, ENT_QUOTES, "UTF-8");
+            if ($result = $connection->query(sprintf("INSERT INTO product_categories VALUES (NULL, '%s')",
+                mysqli_real_escape_string($connection, $category_name)))) {
                 unset($_POST['admin_privileges']);
             } else {
                 throw new Exception('Failed to create new category');
