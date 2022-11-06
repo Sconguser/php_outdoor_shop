@@ -2,6 +2,7 @@
 require_once "bootstrap_include.php";
 require_once "connect.php";
 require_once "aux_func.php";
+require_once "db_converters.php";
 session_start();
 if (!isset($_SESSION['user_data']) || !isset($_POST['item_id'])) {
     header('Location: shop.php');
@@ -68,9 +69,26 @@ if (isset($_POST['comment'])) {
             }
         }
     }
-
 }
-
+if (isset($_POST['delete_comment_id'])) {
+    $connection = @new mysqli($host, $db_user, $db_password, $db_name);
+    if ($connection->connect_errno != 0 && $debug == 1) {
+        echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
+    } else {
+        $comment_id = $_POST['delete_comment_id'];
+        try {
+            if ($result = $connection->query("DELETE FROM comments WHERE id=$comment_id")) {
+                $_SESSION['e_deleteComment'] = 'Pomyślnie usunięto komenatrz';
+            } else {
+                throw new Exception("Nie udało się usunąć komentarza");
+            }
+            $connection->close();
+        } catch (Exception $e) {
+            $_SESSION['e_deleteComment'] = $e;
+            $connection->close();
+        }
+    }
+}
 
 
 function commentField($item_id)
@@ -80,8 +98,6 @@ function commentField($item_id)
     echo '<br/>';
     $rand = rand();
     $_SESSION['rand'] = $rand;
-//    echo $_SESSION['rand'];
-//    exit();
     echo '<input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />';
     ratingSelect();
     echo '<br/>';
@@ -112,17 +128,36 @@ function ratingSelect(): void
     echo '</select>';
 }
 
+function adminCommentActions($id, $item_id): void
+{
+    echo '<div>';
+    echo '<form method="post">';
+    echo '<input type="hidden" name="delete_comment_id" value="' . $id . '"/>';
+    echo '<input type="hidden" name="item_id" value="' . $item_id . '"/>';
+    echo '<button type="submit" class="btn btn-primary btn-sm">Usuń ten komentarz</button>';
+    echo '</form>';
+    echo '</div>';
+}
+
 function commentSection(): void
 {
     foreach ($_SESSION['comments'] as $comment => $cur) {
         echo '<div class="card">';
-        echo 'Id: ' . $cur['id'] . ' UserId: ' . $cur['user_id'] . ' Comment: ' . $cur['comment'] . ' Date: ' . $cur['date'] . ' ';
+        echo userIdToNameAndLastName($cur['user_id'], $cur['is_anonym']);
+        echo '<br/>';
+        echo '<h1 style="font-size: 10px" >' . $cur['date'] . '</h1>';
         echo '</br>';
+        echo $cur['comment'];
+        echo '</br>';
+        if ($_SESSION['user_data']['is_admin']) {
+            adminCommentActions($cur['id'], $_POST['item_id']);
+        }
         echo '</div>';
     }
 }
 
-function commentPart($item_id){
+function commentPart($item_id)
+{
     echo '<hr class="border border-primary border-3 opacity-75">';
     echo '<div class="container">';
     echo '<b> Komentarze: </b></br>';
@@ -160,29 +195,18 @@ function commentPart($item_id){
         showAlert($_SESSION['e_addComment']);
         unset($_SESSION['e_addComment']);
     }
-    /**
-     * @return void
-     */
-    function productInfoSection(): void
-    {
-        echo 'Nazwa produktu: ' . $_SESSION['focused_product']['name'];
-        echo '<br/>';
-        echo 'Cena: ' . $_SESSION['focused_product']['price'];
-        echo '<br/>';
-        echo 'Dostępność: ' . availabitiy($_SESSION['focused_product']['quantity']);
+    if (isset($_SESSION['e_deleteComment'])) {
+        showAlert($_SESSION['e_deleteComment']);
+        unset($_SESSION['e_deleteComment']);
     }
 
+
     if (isset($_SESSION['focused_product'])) {
-        productInfoSection();
+        productInfoSection($_SESSION['focused_product']);
+        buySection($_SESSION['focused_product']);
         commentPart($_SESSION['focused_product']['id']);
         unset($_SESSION['focused_product']);
-//        echo $_SESSION['rand'];
-//        exit();
     }
-//    if (isset($_SESSION['comments'])) {
-//        commentSection();
-//        unset($_SESSION['comments']);
-//    }
 
     ?>
 </div>

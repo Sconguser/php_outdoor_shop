@@ -120,7 +120,7 @@ if (isset($_POST['chosen_category']) && $_POST['chosen_category'] != -1) {
         unset($_SESSION['e_addToBasket']);
     }
     ?>
-    Kategoria:
+    <b>Kategoria:</b>
     <?php
     if (isset($_SESSION['category_list'])) {
         echo '<form method="POST">';
@@ -135,18 +135,13 @@ if (isset($_POST['chosen_category']) && $_POST['chosen_category'] != -1) {
         echo '</form>';
         unset($_SESSION['category_list']);
     }
+
+
     if (isset($_SESSION['product_list'])) {
         foreach ($_SESSION['product_list'] as $item => $cur) {
             echo '<div class="card">';
-            echo '<form method="POST" action="add_to_basket.php">';
-            echo 'Id: ' . $cur['id'] . ' Nazwa: ' . $cur['name'] . ' Cena: ' . $cur['price'] . ' Ilość: ' . $cur['quantity'] . ' ';
-            echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';
-            echo '</br>';
-            echo 'Ilość:<input type="number" name="quantity" value="1"/>';
-            echo '</br>';
-//            echo '<input type="submit" value="Dodaj do koszyka" />';
-            echo '<button type="submit" class="btn btn-primary btn-sm">Dodaj do koszyka</button>';
-            echo '</form>';
+            productInfoSection($cur);
+            buySection($cur);
             echo '<form action="product_details.php" method="POST">';
             echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';
             echo '<button type="submit" class="btn btn-primary btn-sm">Szczegóły produktu</button>';

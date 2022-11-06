@@ -1,5 +1,6 @@
 <?php
 require_once "bootstrap_include.php";
+require_once "db_converters.php";
 session_start();
 if (!isset($_SESSION['user_data']) || !isset($_SESSION['user_data']['basket'])) {
     $_SESSION['e_mainRedirect'] = "Coś poszło nie tak";
@@ -88,7 +89,9 @@ $connection->close();
     if (isset($_SESSION['basket_item_list'])) {
         foreach ($_SESSION['basket_item_list'] as $item => $cur) {
             echo '<div class="card">';
-            echo 'Id: ' . $cur['id'] . ' Item id: ' . $cur['item_id'] . ' Ilość: ' . $cur['amount'] . ' ';
+            echo productIdToName($cur['item_id']);
+            echo '<br />';
+            echo  'Ilość: ' . $cur['amount'] ;
             echo '<form method="POST">';
             echo '<input type="hidden" name="basket_item_id" value="' . $cur['id'] . '"/>';
             echo '<input type="hidden" name="item_id" value="' . $cur['item_id'] . '"/>';
