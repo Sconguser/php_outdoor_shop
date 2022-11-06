@@ -97,11 +97,12 @@ if (!isset($_SESSION['user_address'])) {
         Kod pocztowy: <input type="text" value="<?php
         echo $_SESSION['user_address']['post_code'];
         ?>" name="post_code"/>
+        <br />
 <!--        <input type="submit" value="Zapisz dane"/>-->
         <button type="submit" class="btn btn-primary btn-sm">Zapisz dane</button>
     </form>
     <br/><br/>
-    <a href="main.php">Wróć do strony głównej</a>
+<!--    <a href="main.php">Wróć do strony głównej</a>-->
 </div>
 </body>
 </html>

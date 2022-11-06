@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<!--<nav class="navbar navbar-expand-lg bg-light" style="background-color: green">-->
+<nav class="navbar navbar-expand navbar-light" style="background-color: greenyellow;">
     <div class ="container-fluid">
         <a class="navbar-brand" href="main.php">Sklep turystyczny</a>
     </div>

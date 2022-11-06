@@ -82,7 +82,8 @@ if (isset($_POST['order_status'])) {
                 echo 'Id: ' . $cur['id'] . ' Price: ' . $cur['price'] . ' Date: ' . $cur['date_of_order'] . ' ' . 'Status: ' . $cur['order_status'];
                 echo '<input type="hidden" name="order_id" value="' . $cur['id'] . '"/>';
                 echo '<br/>';
-                echo '<input type="submit" value="Zmień status zamówienia" />';
+//                echo '<input type="submit" value="Zmień status zamówienia" />';
+                echo '<button type="submit" class="btn btn-primary btn-sm">Zmień status zamówienia</button>';
                 echo '</form>';
                 echo '<br/>';
             } else {
@@ -101,7 +102,7 @@ if (isset($_POST['order_status'])) {
     }
     ?>
     <br/><br/>
-    <a href="main.php">Wróć do strony głównej</a>
+<!--    <a href="main.php">Wróć do strony głównej</a>-->
 </div>
 </body>
 

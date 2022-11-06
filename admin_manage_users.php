@@ -99,6 +99,7 @@ if (!isset($_SESSION['user_list'])) {
     <?php
     if (isset($_SESSION['user_list'])) {
         foreach ($_SESSION['user_list'] as $item => $cur) {
+            echo '<div class = "card" style="padding: 10px;">';
             echo 'Id: ' . $cur['id'] . ' Imię: ' . $cur['name'] . ' Nazwisko: ' . $cur['lastname'] . ' ';
             if (!$cur['is_admin']) {
                 echo '<form method="POST">';
@@ -120,7 +121,8 @@ if (!isset($_SESSION['user_list'])) {
                 echo '<b>admin</b>';
                 echo '<br />';
             }
-            echo '</br>';
+            echo '</div>';
+            echo '<br/>';
         }
         unset($_SESSION['user_list']);
     }

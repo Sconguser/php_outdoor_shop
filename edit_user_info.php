@@ -50,11 +50,11 @@ if (isset($_POST['name'])) {
         require_once "navbar.php";
     }
     ?>
-    <?php
-    echo '<a href="main.php">Wróć na stronę główną</a>';
-    echo '<br />';
-    echo '<a href="edit_user_address.php">Zmień dane adresowe</a>';
-    ?>
+<!--    --><?php
+//    echo '<a href="main.php">Wróć na stronę główną</a>';
+//    echo '<br />';
+//    echo '<a href="edit_user_address.php">Zmień dane adresowe</a>';
+//    ?>
     <form method="POST">
         Name: <input type="text" value="<?php
         echo $_SESSION['user_data']['name'];
@@ -67,6 +67,7 @@ if (isset($_POST['name'])) {
 <!--        <input type="submit" value="Zapisz dane"/>-->
         <button type="submit" class="btn btn-primary btn-sm">Zapisz dane</button>
     </form>
+    <a class="btn btn-primary btn-sm" href="edit_user_address.php" role="button">Zmień dane adresowe</a>'
     <?php
     if (isset($_SESSION['namechange_success'])) {
         echo $_SESSION['namechange_success'];

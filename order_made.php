@@ -1,3 +1,4 @@
+
 <?php
 function getBasketItems(mysqli $connection, int $debug): void
 {
@@ -27,7 +28,8 @@ function getBasketItems(mysqli $connection, int $debug): void
 
 
 session_start();
-if (!isset($_SESSION['user_data']) || !isset($_SESSION['user_data']['basket'])) {
+require_once "bootstrap_include.php";
+if (!isset($_SESSION['user_data']) || !isset($_SESSION['user_data']['basket']) || !isset($_SESSION['basket_item_list'])) {
     $_SESSION['e_orderMade'] = "Coś poszło nie tak";
     header('Location: summary.php');
     exit();

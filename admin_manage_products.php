@@ -15,7 +15,13 @@ if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
 </head>
 <body>
 <div class="container">
-
+    <?php
+    if($_SESSION['user_data']['is_admin']){
+        require_once "admin_navbar.php";
+    }else {
+        require_once "navbar.php";
+    }
+    ?>
 
     admin products admin admin admin
     <br/><br/>

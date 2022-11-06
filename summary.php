@@ -30,11 +30,14 @@ require_once "connect.php";
     summary <br/><br/>
     <?php
     $_SESSION['e_summaryRedirect'] = '';
-    echo '<a href="edit_user_address.php"> Edytuj dane adresowe</a>';
-    echo '<br />';
     echo 'Cena: ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
     echo '<form action="order_made.php" method="post" name="order">';
-    echo '<input type="submit" value="Zapłać i złóż zamówienie"/>';
+//    echo '<a href="edit_user_address.php"> Edytuj dane adresowe</a>';
+    //    echo '<input type="submit" value="Zapłać i złóż zamówienie"/>';
+    echo '<a class="btn btn-primary btn-sm" href="edit_user_address.php" role="button">Edytuj dane adresowe</a>';
+    echo '<br/>';
+    echo '<br/>';
+    echo '<button type="submit" class="btn btn-primary btn-sm">Zapłać i złóż zamówienie</button>';
     echo '</form>';
     echo '<br/>';
     if (isset($_SESSION['e_orderMade'])) {
@@ -43,7 +46,7 @@ require_once "connect.php";
     }
     ?>
     <br/><br/>
-    <a href="main.php">Wróć do strony głównej</a>
+<!--    <a href="main.php">Wróć do strony głównej</a>-->
 </div>
 </body>
 

@@ -87,27 +87,29 @@ $connection->close();
     <?php
     if (isset($_SESSION['basket_item_list'])) {
         foreach ($_SESSION['basket_item_list'] as $item => $cur) {
+            echo '<div class="card">';
             echo 'Id: ' . $cur['id'] . ' Item id: ' . $cur['item_id'] . ' Ilość: ' . $cur['amount'] . ' ';
             echo '<form method="POST">';
             echo '<input type="hidden" name="basket_item_id" value="' . $cur['id'] . '"/>';
             echo '<input type="hidden" name="item_id" value="' . $cur['item_id'] . '"/>';
             echo '<input type="hidden" name="item_quantity" value="' . $cur['amount'] . '"/>';
-            echo '<button type="submit">Remove from basket</button>';
+            echo '<button type="submit" class="btn btn-primary btn-sm">Usuń</button>';
             echo '</form>';
+            echo '</div>';
             echo '<br/>';
         }
         echo '<br/>';
         echo 'Cena: ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
         echo '<br/>';
-        echo '<a href="summary.php"> Przejdź do podsumowania </a>';
+        echo '<a class="btn btn-primary btn-sm" href="summary.php" role="button">Przejdź do podsumowania</a>';
         unset($_SESSION['basket_item_list']);
     } else {
         echo 'Koszyk jest pusty';
     }
     ?>
     <br/><br/>
-    <a href="main.php">Wróć do strony głównej</a>
-    </div>
-    </body>
+<!--    <a href="main.php">Wróć do strony głównej</a>-->
+</div>
+</body>
 
 </html>
