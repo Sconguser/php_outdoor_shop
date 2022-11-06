@@ -107,6 +107,7 @@ if ($connection->connect_errno != 0 && $debug == 1) {
 //                echo '<br/>';
             }
             echo '</div>';
+            echo '</br>';
         }
         echo '<br/>';
         unset($_SESSION['user_orders']);
