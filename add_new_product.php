@@ -12,19 +12,25 @@ if (isset($_POST['name'])) {
     $name = $_POST['name'];
     $quantity = floor($_POST['quantity']);
     $price = $_POST['price'];
+    $description = $_POST['description'];
     try {
         $connection = @new mysqli($host, $db_user, $db_password, $db_name);
         if ($connection->connect_errno != 0 && $debug == 1) {
             echo "Error:  " . $connection->connect_errno . " Description" . $connection->connect_error;
         } else {
             $name = htmlentities($name, ENT_QUOTES, "UTF-8");
-
-            if ($result = $connection->query(sprintf("INSERT INTO items VALUES (NULL,'%d', '%d', '%s', '%f')",
-            $quantity, $category,  mysqli_real_escape_string($connection, $name), $price))) {
+            $description = htmlentities($description, ENT_QUOTES, "UTF-8");
+            if ($result = $connection->query(sprintf("INSERT INTO items VALUES (NULL,'%d', '%d', '%s', '%f', '%s')",
+                 $quantity,
+                $category,
+                mysqli_real_escape_string($connection, $name),
+                $price,
+                mysqli_real_escape_string($connection, $description)))) {
                 unset($_POST['name']);
                 unset($_POST['category']);
                 unset($_POST['quantity']);
                 unset($_POST['price']);
+                unset($_POST['description']);
 
             } else {
                 throw new Exception('Failed to create new item');
@@ -98,6 +104,10 @@ if (!isset($_SESSION['category_list'])) {
         echo '<br />';
         echo 'Cena: <br /><input type="number" step="0.01" name="price"/>';
         echo '<br />';
+        echo 'Opis: <br/><textarea id="description" name="description"
+          rows="5" cols="66">';
+        echo '</textarea>';
+        echo '<br/>';
         echo '<button type="submit" class="btn btn-primary btn-sm">Dodaj nowy produkt</button>';
         echo '</form>';
         unset($_SESSION['category_list']);

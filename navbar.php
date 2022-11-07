@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light" style="background-color: greenyellow;">
+<nav class="navbar navbar-expand navbar-light" style="background-color: cornflowerblue;">
 <div class="container-fluid">
         <a class="navbar-brand" href="main.php">Minimalistyczny Sklep turystyczny</a>
     </div>

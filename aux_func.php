@@ -26,6 +26,8 @@ function availabitiy($quantity)
  */
 function buySection($cur): void
 {
+    echo '<br/>';
+    echo '<b>Dodaj do koszyka:</b>';
     echo '<form method="POST" action="add_to_basket.php">';
     echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';
     echo '</br>';
@@ -45,7 +47,12 @@ function productInfoSection($product): void
     echo '<br/>';
     echo 'Dostępność: ' . availabitiy($product['quantity']);
 }
-
+function showProductDescription($product):void
+{
+    echo '<b>Opis produktu:</b>';
+    echo '<br/>';
+    echo $product['description'];
+}
 function ratingToString($rating){
     switch($rating){
         case 1:

@@ -1,5 +1,5 @@
 <!--<nav class="navbar navbar-expand-lg bg-light" style="background-color: green">-->
-<nav class="navbar navbar-expand navbar-light" style="background-color: greenyellow;">
+<nav class="navbar navbar-expand navbar-light" style="background-color: lightskyblue;">
     <div class ="container-fluid">
         <a class="navbar-brand" href="main.php">Minimalistyczny Sklep turystyczny - Admin</a>
     </div>

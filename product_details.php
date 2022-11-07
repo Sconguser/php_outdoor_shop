@@ -45,7 +45,10 @@ if (isset($_POST['comment'])) {
             }
             $item_id = $_SESSION['focused_product']['id'];
             try {
-                if ($result = $connection->query("INSERT INTO comments VALUES(NULL, $user_id, $item_id, $rating, '$comment', $anonym, now())")) {
+                $comment = htmlentities($comment, ENT_QUOTES, "UTF-8");
+
+                if ($result = $connection->query(sprintf("INSERT INTO comments VALUES(NULL, $user_id, $item_id, $rating, '%s', $anonym, now())",
+                    mysqli_real_escape_string($connection, $comment),))) {
                     $_SESSION['e_addComment'] = 'Pomyślnie dodano komenatrz';
                 } else {
                     throw new Exception("Nie udało się dodać komentarza");
@@ -168,6 +171,7 @@ function commentSection(): void
             adminCommentActions($cur['id'], $_POST['item_id']);
         }
         echo '</div>';
+        echo '<br/>';
     }
 }
 
@@ -218,10 +222,19 @@ function commentPart($item_id)
     }
 
     if (isset($_SESSION['focused_product'])) {
+        echo '<br/>';
         echo '<div class = "row">';
         echo '<div class ="col-sm">';
+        echo '<div class="card">';
         productInfoSection($_SESSION['focused_product']);
+        echo '</div>';
+        echo '<br/>';
+        echo '<div class="card">';
+        showProductDescription($_SESSION['focused_product']);
+        echo '</div>';
+        echo '<div class="card">';
         buySection($_SESSION['focused_product']);
+        echo '</div>';
         echo '</div>';
         echo '<div class ="col-sm">';
         echo showProductImage($_SESSION['focused_product']['id']);
