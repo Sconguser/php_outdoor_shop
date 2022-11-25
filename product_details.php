@@ -202,6 +202,7 @@ function commentPart($item_id)
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Szczegóły produktu</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 <body>

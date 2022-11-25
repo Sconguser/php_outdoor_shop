@@ -17,6 +17,7 @@ require_once "connect.php";
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Podsumowanie</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
 <div class="container">

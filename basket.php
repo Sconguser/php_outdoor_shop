@@ -77,6 +77,7 @@ $connection->close();
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Koszyk</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
 <div class="container">

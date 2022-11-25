@@ -15,7 +15,8 @@ if (!isset($_SESSION['signup_success'])) {
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Rejestracja powiodła się gówno gówno gówno gówno</title>
+    <title>Rejestracja powiodła się</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
 <div class="container">

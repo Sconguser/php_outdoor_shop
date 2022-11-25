@@ -13,10 +13,10 @@ if (isset($_SESSION['logged_in']) && ($_SESSION['logged_in'])) {
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Logowanie</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
-<body>
+<body class="index">
 <div class="container">
-
     <?php
     require_once "noauthnavbar.php";
     ?>

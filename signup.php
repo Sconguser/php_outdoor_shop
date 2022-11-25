@@ -108,6 +108,7 @@ if (isset($_POST['email'])) {
             margin-bottom: 10px;
         }
     </style>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
 <div class="container">

@@ -40,6 +40,7 @@ if (isset($_POST['name'])) {
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Strona do edycji danych osobowych</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
 <div class="container">

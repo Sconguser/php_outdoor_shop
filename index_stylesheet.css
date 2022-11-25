@@ -1,0 +1,36 @@
+body{
+    background-color:#36393b
+}
+
+button{
+    color:rgb(81,81,81)
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #ff5503 !important;
+}
+
+card{
+    background-color: #990410 !important;
+}
+.row{
+    background-color: #990410 !important;
+}
+form{
+    background-color: #f4f6f2;
+    alignment: center;
+}
+h1{
+    color:#990410
+}
+p{
+    color:#990410
+}
+a{
+    color:#990410
+}
+b{
+    color:#ff5503;
+}
+div{
+    text-align:center
+}

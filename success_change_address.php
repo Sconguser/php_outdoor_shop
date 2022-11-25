@@ -14,6 +14,7 @@ if (!isset($_SESSION['success_change_address'])) {
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Zmiana adresu się powiodła</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 <body>

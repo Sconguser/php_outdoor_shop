@@ -1,0 +1,40 @@
+body{
+    background-color:#36393b
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #ff5503 !important;
+    /*padding: 10px;*/
+    margin-top:10px;
+}
+/*.dropdown{*/
+/*    padding: 10px; !important*/
+/*}*/
+select{
+    padding: 6px;
+    margin:10px;
+    border-radius: 10px;
+    color:#ff5503;
+}
+.card{
+    background-color: #f4f6f2 !important;
+    border-radius: 10px;
+}
+form{
+    background-color: #f4f6f2;
+    alignment: center;
+}
+h1{
+    color:#990410
+}
+p{
+    color:#f4f6f2
+}
+a{
+    color:#990410
+}
+b{
+    color:#ff5503;
+}
+div{
+    text-align:center
+}
