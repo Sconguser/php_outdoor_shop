@@ -145,6 +145,7 @@ if (isset($_POST['chosen_category']) && $_POST['chosen_category'] != -1) {
             echo '<div class ="row">';
             echo '<div class="col-sm">';
             productInfoSection($cur);
+            echo '<br/>';
             buySection($cur);
             echo '<form action="product_details.php" method="POST">';
             echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';

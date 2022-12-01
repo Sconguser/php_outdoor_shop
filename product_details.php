@@ -178,7 +178,7 @@ function commentSection(): void
 function commentPart($item_id)
 {
     echo '<hr class="border border-primary border-3 opacity-75">';
-    echo '<div class="container">';
+    echo '<div class="card">';
     echo '<b> Komentarze: </b></br>';
     if (isset($_SESSION['comments'])) {
         commentSection();
@@ -227,12 +227,19 @@ function commentPart($item_id)
         echo '<div class = "row">';
         echo '<div class ="col-sm">';
         echo '<div class="card">';
-        productInfoSection($_SESSION['focused_product']);
+        $product = $_SESSION['focused_product'];
+        echo '<b>' .$product['name'].'</b>';
+        echo '<br/>';
+        echo '<b>Cena: </b>' . $product['price'] .' zł';
+        echo '<br/>';
+        echo '<b>Dostępność: </b>' . availabitiy($product['quantity']);
+//        productInfoSection($_SESSION['focused_product']);
         echo '</div>';
         echo '<br/>';
         echo '<div class="card">';
         showProductDescription($_SESSION['focused_product']);
         echo '</div>';
+        echo'</br>';
         echo '<div class="card">';
         buySection($_SESSION['focused_product']);
         echo '</div>';

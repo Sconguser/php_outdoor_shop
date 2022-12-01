@@ -30,8 +30,8 @@ function buySection($cur): void
     echo '<b>Dodaj do koszyka:</b>';
     echo '<form method="POST" action="add_to_basket.php">';
     echo '<input type="hidden" name="item_id" value="' . $cur['id'] . '"/>';
-    echo '</br>';
-    echo 'Ilość:<input type="number" name="quantity" value="1"/>';
+//    echo '</br>';
+    echo 'Ilość:<input type="number" name="quantity" value="1" style="width:2em""/>';
     echo '</br>';
     echo '<button type="submit" class="btn btn-primary btn-sm">Dodaj do koszyka</button>';
     echo '</form>';
@@ -43,9 +43,10 @@ function productInfoSection($product): void
 {
     echo '<b>' .$product['name'].'</b>';
     echo '<br/>';
-    echo 'Cena: ' . $product['price'] .' zł';
+    echo '<b>Cena: </b><br/>' . $product['price'] .' zł';
     echo '<br/>';
-    echo 'Dostępność: ' . availabitiy($product['quantity']);
+    echo '<b>Dostępność: </b><br/>' . availabitiy($product['quantity']);
+
 }
 function showProductDescription($product):void
 {
@@ -69,10 +70,10 @@ function ratingToString($rating){
     return "Nie wiadomo :/";
 }
 function showProductImage($product_id){
-    return '<img src="images/'.$product_id.'.jpg" alt="Product image" width="500" height="400"/>';
+    return '<img src="images/'.$product_id.'.jpg" alt="Product image" width="500" height="400" margin="10px" style="vertical-align:middle;margin:50px 0px"/>';
 }
 
 function showProductThumb($product_id){
-    return '<img src="images/'.$product_id.'.jpg" alt="Product image" width="250" height="200"/>';
+    return '<img src="images/'.$product_id.'.jpg" alt="Product image" width="250" height="200" style="vertical-align:middle;margin:50px 0px"/>';
 }
 ?>
