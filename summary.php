@@ -18,6 +18,7 @@ require_once "connect.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Podsumowanie</title>
     <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" type="image/ico" href="images/favicon.ico">
 </head>
 <body>
 <div class="container">

@@ -109,6 +109,7 @@ if (isset($_POST['email'])) {
         }
     </style>
     <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" type="image/ico" href="images/favicon.ico">
 </head>
 <body>
 <div class="container">

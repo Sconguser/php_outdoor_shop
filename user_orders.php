@@ -56,6 +56,7 @@ if ($connection->connect_errno != 0 && $debug == 1) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Zamówienia</title>
     <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" type="image/ico" href="images/favicon.ico">
 </head>
 <body>
 <div class="container">
