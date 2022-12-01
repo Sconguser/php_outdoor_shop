@@ -46,6 +46,8 @@ if (isset($_POST['category_name']) && strlen($_POST['category_name']) > 1) {
         require_once "navbar.php";
     }
     ?>
+    <br/>
+    <div style="background-color: #f4f6f2">
     <b>Panel administratora - dodawanie nowej kategorii produktu</b>
     <form method="POST">
         Category name: <input type="text" name="category_name"/>
@@ -54,7 +56,8 @@ if (isset($_POST['category_name']) && strlen($_POST['category_name']) > 1) {
         <button type="submit" class="btn btn-primary btn-sm">Dodaj nową kategorię</button>
     </form>
     </form>
-    <br/><br/>
+    <br/>
+    </div>
 <!--    <a href="main.php">Wróć do strony głównej</a>-->
 </div>
 </body>

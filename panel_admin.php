@@ -23,16 +23,22 @@ if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
         require_once "navbar.php";
     }
     ?>
-    <b>Panel administratora</b>
-    <br/><br/>
+    <br/>
+    <div style="background-color: #f4f6f2">
+        <br/>
+        <b>Panel administratora</b>
+        <br/><br/>
 
-    <a href="admin_manage_users.php">Zarządzaj użytkownikami</a>
-    <br/>
-    <br/>
-    <a href="admin_manage_products.php">Zarządzaj produktami</a>
-    <br/>
-    <br/>
-    <a href="main.php">Wróć do strony głównej</a>
+        <a href="admin_manage_users.php">Zarządzaj użytkownikami</a>
+        <br/>
+        <br/>
+        <a href="admin_manage_products.php">Zarządzaj produktami</a>
+        <br/>
+        <br/>
+        <a href="main.php">Wróć do strony głównej</a>
+        <br/>
+        <br/>
+    </div>
 </div>
 </body>
 

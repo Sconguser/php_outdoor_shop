@@ -88,15 +88,18 @@ $connection->close();
         require_once "navbar.php";
     }
     ?>
-    <b>Koszyk</b>
-    <br/><br/>
+    <br/>
+    <div style="background-color: #f4f6f2">
+    <b>Twój koszyk</b>
+    </div>
+    <br/>
 
     <?php
     if (isset($_SESSION['basket_item_list'])) {
         foreach ($_SESSION['basket_item_list'] as $item => $cur) {
             echo '<div class="card">';
                 echo '<div class="row">';
-                    echo '<div class="col-sm">';
+                    echo '<div class="col-sm" style="margin: 90px">';
                         echo productIdToName($cur['item_id']);
                         echo '<br />';
                         echo  'Ilość: ' . $cur['amount'] ;
@@ -104,7 +107,7 @@ $connection->close();
                         echo '<input type="hidden" name="basket_item_id" value="' . $cur['id'] . '"/>';
                         echo '<input type="hidden" name="item_id" value="' . $cur['item_id'] . '"/>';
                         echo '<input type="hidden" name="item_quantity" value="' . $cur['amount'] . '"/>';
-                        echo '<button type="submit" class="btn btn-primary btn-sm">Usuń</button>';
+                        echo '<button type="submit" class="btn btn-primary btn-sm">Usuń z koszyka</button>';
                         echo '</form>';
                     echo '</div>';
                     echo '<div class="col-sm">';
@@ -115,13 +118,20 @@ $connection->close();
             echo '<br/>';
         }
         echo '<br/>';
-        echo 'Cena: ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
+        echo '<div style="background-color: #f4f6f2">';
+        echo '<b>Cena:</b> ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
         echo '<br/>';
-        echo '<a class="btn btn-primary btn-sm" href="summary.php" role="button">Przejdź do podsumowania</a>';
+        echo '<a class="btn btn-primary btn-sm" href="summary.php" role="button" style="margin: 10px">Przejdź do podsumowania</a>';
+        echo '</div>';
     } else {
+        echo '<div style="background-color: #f4f6f2">';
+        echo '<br/>';
         echo '<b>Koszyk jest pusty</b>';
         echo '</br>';
         echo '<a class="btn btn-primary btn-sm" href="shop.php" role="button">Idź do sklepu</a>';
+        echo '<br/>';
+        echo '<br/>';
+        echo "</div>";
     }
     ?>
     <br/><br/>

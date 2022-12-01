@@ -77,33 +77,40 @@ if (!isset($_SESSION['user_address'])) {
         require_once "navbar.php";
     }
     ?>
-    <?php
-    if (isset($_SESSION['e_summaryRedirect'])) {
-        echo '<a href="summary.php">Wróć</a>';
-    } else {
-        echo '<a href="edit_user_info.php">Wróć</a>';
-    }
-    ?>
-    <form method="POST">
-        Miasto: <input type="text" value="<?php
-        echo $_SESSION['user_address']['city'];
-        ?>" name="city"/>
+    </br>
+    <div style="background-color: #f4f6f2">
+        <?php
+        if (isset($_SESSION['e_summaryRedirect'])) {
+            echo '<a class="btn btn-primary btn-sm" href="summary.php" role="button">Wróć</a>';
+        } else {
+            echo '<a class="btn btn-primary btn-sm" href="edit_user_info.php" role="button">Wróć</a>';
+        }
+        ?>
         <br/>
+        <form method="POST">
+            <br/>
+            <b>Miasto:</b> <input type="text" value="<?php
+            echo $_SESSION['user_address']['city'];
+            ?>" name="city"/>
+            <br/>
+            <br/>
+            <b>Ulica:</b> <input type="text" value="<?php
+            echo $_SESSION['user_address']['street'];
+            ?>" name="street"/>
+            <br/>
+            <br/>
+            <b>Kod pocztowy:</b> <input type="text" value="<?php
+            echo $_SESSION['user_address']['post_code'];
+            ?>" name="post_code"/>
+            <br/>
+            <!--        <input type="submit" value="Zapisz dane"/>-->
+            <button type="submit" class="btn btn-primary btn-sm">Zapisz dane</button>
+            <br/>
+        </form>
         <br/>
-        Ulica: <input type="text" value="<?php
-        echo $_SESSION['user_address']['street'];
-        ?>" name="street"/>
-        <br/>
-        <br/>
-        Kod pocztowy: <input type="text" value="<?php
-        echo $_SESSION['user_address']['post_code'];
-        ?>" name="post_code"/>
-        <br />
-<!--        <input type="submit" value="Zapisz dane"/>-->
-        <button type="submit" class="btn btn-primary btn-sm">Zapisz dane</button>
-    </form>
+    </div>
     <br/><br/>
-<!--    <a href="main.php">Wróć do strony głównej</a>-->
+    <!--    <a href="main.php">Wróć do strony głównej</a>-->
 </div>
 </body>
 </html>

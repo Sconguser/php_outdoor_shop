@@ -105,10 +105,15 @@ if ($connection->connect_errno != 0 && $debug == 1) {
         require_once "navbar.php";
     }
     ?>
-    Dziękujemy za złożenie zamówienia <br/><br/>
-    <a href="user_orders.php">Zobacz swoje zamówienia</a>
+    <br/>
+    <div style="background-color: #f4f6f2">
+        <b>Dziękujemy za złożenie zamówienia</b> <br/><br/>
+    <a class="btn btn-primary btn-sm" href="user_orders.php" role="button">Zobacz swoje zamówienia</a>
     <br/><br/>
-    <a href="main.php">Wróć do strony głównej</a>
+    <a class="btn btn-primary btn-sm" href="main.php" role="button">Wróć do strony głównej</a>
+        <br/>
+        <br/>
+    </div>
 </div>
 </body>
 

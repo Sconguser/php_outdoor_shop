@@ -1,4 +1,5 @@
 <?php
+require_once "bootstrap_include.php";
 session_start();
 if (!isset($_SESSION['success_change_address'])) {
     header('Location: index.php');
@@ -19,11 +20,15 @@ if (!isset($_SESSION['success_change_address'])) {
 
 <body>
 <div class="container">
-    <br/><br/>
-    Zmiana adresu przebiegła pomyślnie.
-    <a href="edit_user_address.php">Wróć</a>
-    <br/>
-    </form>
+<br/>
+    <div style="background-color: #f4f6f2">
+        <br/>
+        <b>Zmiana adresu przebiegła pomyślnie.</b>
+        <br/>
+        <a href="edit_user_address.php">Wróć</a>
+        <br/>
+        </form>
+    </div>
 </div>
 </body>
 </html>

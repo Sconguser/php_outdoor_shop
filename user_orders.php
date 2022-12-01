@@ -66,8 +66,10 @@ if ($connection->connect_errno != 0 && $debug == 1) {
         require_once "navbar.php";
     }
     ?>
-    <b>Historia zamówień:</b>
     <br/>
+    <div style="background-color: #f4f6f2">
+        <b>Historia zamówień:</b>
+    </div>
     <br/>
 
     <?php

@@ -51,30 +51,38 @@ if (isset($_POST['name'])) {
         require_once "navbar.php";
     }
     ?>
-<!--    --><?php
-//    echo '<a href="main.php">Wróć na stronę główną</a>';
-//    echo '<br />';
-//    echo '<a href="edit_user_address.php">Zmień dane adresowe</a>';
-//    ?>
-    <form method="POST">
-        Name: <input type="text" value="<?php
-        echo $_SESSION['user_data']['name'];
-        ?>" name="name"/>
+    <!--    --><?php
+    //    echo '<a href="main.php">Wróć na stronę główną</a>';
+    //    echo '<br />';
+    //    echo '<a href="edit_user_address.php">Zmień dane adresowe</a>';
+    //    ?>
+    <br/>
+    <div style="background-color:#f4f6f2">
         <br/>
-        Lastname: <input type="text" value="<?php
-        echo $_SESSION['user_data']['lastname'];
-        ?>" name="lastname"/>
+        <form method="POST">
+            Name: <input type="text" placeholder="Name" value="<?php
+            echo $_SESSION['user_data']['name'];
+            ?>" name="name"/>
+            <br/>
+            <br/>
+            Lastname: <input type="text" placeholder="Lastname" value="<?php
+            echo $_SESSION['user_data']['lastname'];
+            ?>" name="lastname"/>
+            <br/>
+            <!--        <input type="submit" value="Zapisz dane"/>-->
+            <button type="submit" class="btn btn-primary btn-sm">Zapisz dane</button>
+        </form>
+        <a class="btn btn-primary btn-sm" href="edit_user_address.php" role="button">Zmień dane adresowe</a>'
         <br/>
-<!--        <input type="submit" value="Zapisz dane"/>-->
-        <button type="submit" class="btn btn-primary btn-sm">Zapisz dane</button>
-    </form>
-    <a class="btn btn-primary btn-sm" href="edit_user_address.php" role="button">Zmień dane adresowe</a>'
-    <?php
-    if (isset($_SESSION['namechange_success'])) {
-        echo $_SESSION['namechange_success'];
-        unset($_SESSION['namechange_success']);
-    }
-    ?>
+        <br/>
+        <?php
+        if (isset($_SESSION['namechange_success'])) {
+            echo '<b>' . $_SESSION['namechange_success'] . '</b>';
+            unset($_SESSION['namechange_success']);
+        }
+        ?>
+    </div>
+
 </div>
 </body>
 </html>

@@ -95,7 +95,10 @@ if (!isset($_SESSION['user_list'])) {
         require_once "navbar.php";
     }
     ?>
+    <br/>
+    <div style="background-color: #f4f6f2">
     <b>Panel administratora - zarządzanie użytkownikami</b>
+    </div>
     <br/><br/>
 
     <?php

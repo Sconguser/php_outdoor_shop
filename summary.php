@@ -28,11 +28,13 @@ require_once "connect.php";
         require_once "navbar.php";
     }
     ?>
+    <br/>
+    <div style="background-color: #f4f6f2">
     <b>Podsumowanie zamówienia:</b>
-    <br/><br/>
+    <br/>
     <?php
     $_SESSION['e_summaryRedirect'] = '';
-    echo 'Cena: ' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
+    echo '<b>Cena: </b>' . $_SESSION['user_data']['basket']['total_price'] . 'zł';
     echo '<form action="order_made.php" method="post" name="order">';
 //    echo '<a href="edit_user_address.php"> Edytuj dane adresowe</a>';
     //    echo '<input type="submit" value="Zapłać i złóż zamówienie"/>';
@@ -47,6 +49,7 @@ require_once "connect.php";
         unset($_SESSION['e_orderMade']);
     }
     ?>
+    </div>
     <br/><br/>
 <!--    <a href="main.php">Wróć do strony głównej</a>-->
 </div>

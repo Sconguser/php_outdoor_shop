@@ -23,11 +23,13 @@ if (!isset($_SESSION['signup_success'])) {
     <?php
     require_once "noauthnavbar.php";
     ?>
-    <br/><br/>
+    <br/>
+    <div style="background-color: #f4f6f2">
     <b>Dziękujemy za rejestrację. Możesz się teraz zalogować.</b>
     <br/>
     <a href="index.php">Zaloguj się na swoje konto</a>
     <br/>
+    </div>
 </div>
 </body>
 </html>

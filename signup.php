@@ -115,9 +115,12 @@ if (isset($_POST['email'])) {
     <?php
     require_once "noauthnavbar.php";
     ?>
-    <b>Zarejestruj się:</b>
+    <br/>
+    <div style="background-color: #f4f6f2">
+        <br/>
+    <b>Zarejestruj się</b>
     <form method="POST">
-        Imię: <br/> <input type="text" value="<?php
+        <b>Imię</b> <br/> <input type="text" value="<?php
         if (isset($_SESSION['fr_name'])) {
             echo $_SESSION['fr_name'];
             unset($_SESSION['fr_name']);
@@ -129,7 +132,7 @@ if (isset($_POST['email'])) {
             unset($_SESSION['e_name']);
         }
         ?>
-        Nazwisko: <br/> <input type="text" value="<?php
+        <b>Nazwisko</b> <br/> <input type="text" value="<?php
         if (isset($_SESSION['fr_lastname'])) {
             echo $_SESSION['fr_lastname'];
             unset($_SESSION['fr_lastname']);
@@ -141,7 +144,7 @@ if (isset($_POST['email'])) {
             unset($_SESSION['e_lastname']);
         }
         ?>
-        Email: <br/> <input type="text" value="<?php
+        <b>Email</b> <br/> <input type="text" value="<?php
         if (isset($_SESSION['fr_email'])) {
             echo $_SESSION['fr_email'];
             unset($_SESSION['fr_email']);
@@ -153,14 +156,14 @@ if (isset($_POST['email'])) {
             unset($_SESSION['e_email']);
         }
         ?>
-        Hasło: <br/> <input type="password" name="password"/><br/>
+        <b>Hasło</b> <br/> <input type="password" name="password"/><br/>
         <?php
         if (isset($_SESSION['e_password'])) {
             echo '<div class="error">' . $_SESSION['e_password'] . '</div>';
             unset($_SESSION['e_password']);
         }
         ?>
-        Powtórz hasło: <br/> <input type="password" name="passwordConfirmation"/><br/>
+        <b>Powtórz hasło</b> <br/> <input type="password" name="passwordConfirmation"/><br/>
         <?php
         if (isset($_SESSION['e_passwordConfirmation'])) {
             echo '<div class="error">' . $_SESSION['e_passwordConfirmation'] . '</div>';
@@ -184,6 +187,8 @@ if (isset($_POST['email'])) {
         <br/>
         <a href="index.php">Wróć na stronę logowania</a>
     </form>
+        <br/>
+    </div>
 </div>
 </body>
 

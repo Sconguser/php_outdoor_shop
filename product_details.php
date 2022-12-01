@@ -162,8 +162,9 @@ function commentSection(): void
         echo userIdToNameAndLastName($cur['user_id'], $cur['is_anonym']);
         echo '<br/>';
         echo '<h1 style="font-size: 10px" >' . $cur['date'] . '</h1>';
-        echo 'Ocena: ';
+        echo '<b>Ocena: ';
         echo ratingToString($cur['rating']);
+        echo '</b>';
         echo '<br/>';
         echo $cur['comment'];
         echo '</br>';
@@ -245,7 +246,9 @@ function commentPart($item_id)
         echo '</div>';
         echo '</div>';
         echo '<div class ="col-sm">';
+        echo '<div class="card" style="margin-bottom: 10px">';
         echo showProductImage($_SESSION['focused_product']['id']);
+        echo '</div>';
         echo '</div>';
         echo '</div>';
         commentPart($_SESSION['focused_product']['id']);

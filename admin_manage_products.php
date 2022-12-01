@@ -23,8 +23,10 @@ if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
         require_once "navbar.php";
     }
     ?>
-
-    <b>Panel administratora - zarządzanie produktami</b>
+    <br/>
+    <div style="background-color: #f4f6f2">
+        <br/>
+        <b>Panel administratora - zarządzanie produktami</b>
     <br/><br/>
 
     <a href="add_new_category.php">Dodaj nową kategorię produktu</a>
@@ -34,6 +36,10 @@ if (!isset($_SESSION['user_data']) || !$_SESSION['user_data']['is_admin']) {
     <br/>
     <br/>
     <a href="update_product.php">Edytuj produkt</a>
+        <br/>
+
+        <br/>
+    </div>
 </div>
 </body>
 </html>

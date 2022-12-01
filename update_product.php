@@ -41,7 +41,7 @@ if (isset($_POST['product_id'])) {
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
         try {
-            if ($result = $connection->query("UPDATE items SET price=$price, quantity = $quantity WHERE id=$item_id"));
+            if ($result = $connection->query("UPDATE items SET price=$price, quantity = $quantity WHERE id=$item_id")) ;
             {
                 $_SESSION['e_productUpdate'] = 'Zaktualizowano produkt';
             }
@@ -70,34 +70,38 @@ if (isset($_POST['product_id'])) {
     } else {
         require_once "navbar.php";
     }
-       ?>
-    <b>Panel administratora - edycja produktu</b>
-    <?php
-    if (isset($_SESSION['product_list'])) {
-        echo '<form method="POST">';
-        echo 'Nazwa towaru: <select name="product_id">';
-        echo '<option value=-1>Brak</option>';
-        foreach ($_SESSION['product_list'] as $item => $cur) {
-            echo '<option value="' . $cur['id'] . '">' . $cur['name'] . '</option>';
-        }
-        echo '</select>';
-        echo '<br/>';
-        echo 'Ilość: <input type="number" name="quantity" value=0>';
-//        echo '<input type="submit" value="Wyszukaj po kategorii" />';
-        echo '<br/>';
-        echo 'Cena: <input type="number" name="price" step="0.01" value=0.0>';
-        echo '<br/>';
-        echo '<button type="submit" class="btn btn-primary btn-sm">Zapisz zmiany</button>';
-        echo '</form>';
-        unset($_SESSION['product_list']);
-    }
-    if(isset($_SESSION['e_productUpdate'])){
-        echo '<p>'.$_SESSION['e_productUpdate'].'</p>';
-        unset($_SESSION['e_productUpdate']);
-    }
     ?>
+    <br/>
+    <div style="background-color: #f4f6f2">
+        <br/>
+        <b>Panel administratora - edycja produktu</b>
+        <?php
+        if (isset($_SESSION['product_list'])) {
+            echo '<form method="POST">';
+            echo 'Nazwa towaru: <select name="product_id">';
+            echo '<option value=-1>Brak</option>';
+            foreach ($_SESSION['product_list'] as $item => $cur) {
+                echo '<option value="' . $cur['id'] . '">' . $cur['name'] . '</option>';
+            }
+            echo '</select>';
+            echo '<br/>';
+            echo 'Ilość: <input type="number" name="quantity" value=0>';
+//        echo '<input type="submit" value="Wyszukaj po kategorii" />';
+            echo '<br/>';
+            echo 'Cena: <input type="number" name="price" step="0.01" value=0.0>';
+            echo '<br/>';
+            echo '<button type="submit" class="btn btn-primary btn-sm">Zapisz zmiany</button>';
+            echo '</form>';
+            unset($_SESSION['product_list']);
+        }
+        if (isset($_SESSION['e_productUpdate'])) {
+            echo '<p>' . $_SESSION['e_productUpdate'] . '</p>';
+            unset($_SESSION['e_productUpdate']);
+        }
+        ?>
 
-    <br/><br/>
+        <br/>
+    </div>
     <!--    <a href="main.php">Wróć do strony głównej</a>-->
 </div>
 </body>

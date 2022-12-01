@@ -20,24 +20,27 @@ if (isset($_SESSION['logged_in']) && ($_SESSION['logged_in'])) {
     <?php
     require_once "noauthnavbar.php";
     ?>
-    <b>Zaloguj się:</b>
     <br/>
-
-    <form action="login.php" method="post">
-        Login:<br/> <input type="text" name="login"/> <br/>
-        Hasło:<br/> <input type="password" name="password"/> <br/>
-        <button type="submit" class="btn btn-primary btn-sm">Zaloguj się</button>
+    <div style="background-color: #f4f6f2">
+        <b>Zaloguj się</b>
         <br/>
-        <?php
-        if (isset($_SESSION['error'])) {
-            echo $_SESSION['error'];
-            unset($_SESSION['error']);
-        }
-        ?>
-        <a href="signup.php">Zarejestruj sie</a>
+        <form action="login.php" method="post">
+            <b>Login</b><br/> <input type="text" name="login"/> <br/>
+            <b>Hasło</b><br/> <input type="password" name="password"/> <br/>
+            <button type="submit" class="btn btn-primary btn-sm">Zaloguj się</button>
+            <br/>
+            <?php
+            if (isset($_SESSION['error'])) {
+                echo $_SESSION['error'];
+                unset($_SESSION['error']);
+            }
+            ?>
+            <a href="signup.php">Zarejestruj sie</a>
+            <br/>
+        </form>
         <br/>
-    </form>
-
+    </div>
+    <br/>
 </div>
 </body>
 </html>

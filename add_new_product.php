@@ -86,6 +86,8 @@ if (!isset($_SESSION['category_list'])) {
         require_once "navbar.php";
     }
     ?>
+    <br/>
+    <div style="background-color: #f4f6f2">
     <b>Panel administratora - dodawanie nowego produktu</b>
     <br/> <br/>
     Kategoria:
@@ -114,6 +116,8 @@ if (!isset($_SESSION['category_list'])) {
         unset($_SESSION['category_list']);
     }
     ?>
+        <br/>
+    </div>
 </div>
 </body>
 </html>
