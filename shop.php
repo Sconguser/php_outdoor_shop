@@ -121,17 +121,19 @@ if (isset($_POST['chosen_category']) && $_POST['chosen_category'] != -1) {
         unset($_SESSION['e_addToBasket']);
     }
     ?>
-    <b>Kategoria:</b>
     <?php
     if (isset($_SESSION['category_list'])) {
+        echo '<br/>';
         echo '<form method="POST">';
+        echo '<b>Kategoria:</b>';
         echo '<select name="chosen_category">';
-        echo ' <option value=-1>Brak</option>';
+        echo '<option value=-1>Brak</option>';
         foreach ($_SESSION['category_list'] as $item => $cur) {
             echo '<option value="' . $cur['id'] . '">' . $cur['category_name'] . '</option>';
         }
         echo '</select>';
-        echo '<button type="submit" class="btn btn-primary btn-sm">Filtruj</button>';
+//        echo '<button type="submit" class="btn btn-primary btn-sm">Filtruj</button>';
+        echo '<button type="submit" class="btn-primary btn-sm">Filtruj</button>';
         echo '</form>';
         unset($_SESSION['category_list']);
     }
