@@ -39,12 +39,47 @@ if (!isset($_SESSION['logged_in'])) {
     }
     ?>
     <div class="container">
+        <br/>
+        <div class="card"
+        ">
+        <br/>
         <?php
         echo "<p><b>Hej " . $_SESSION['user_data']['name'] . "!</b></p>";
         ?>
-        <p>Witamy na stronie Minimalistycznego Sklepu Turystycznego.</p>
-        <p>Znajdziesz tutaj sprzęt turystyczny i tylko to. W minimalistycznym stylu.</p>
+        <h1>Witamy na stronie Minimalistycznego Sklepu Turystycznego.</h1>
+        <b>Znajdziesz tutaj sprzęt turystyczny i tylko to. W minimalistycznym stylu.</b>
+        <br/>
+        <b>Inspirowane wielkimi podróżami produkty Minimalistycznego Sklepu Turystycznego
+            zostały zaprojektowane z myślą o Twoich potrzebach.
+            Kiedy będziesz realizować swój sen o wędrówce
+            w nieznane, Minimalistyczny Sklep Turystyczny będzie tam z Tobą!
+            <br/>
+            Pierwsze produkty marki Minimalistycznego Sklepu Turystycznego powstały w 1996 r. zainspirowane
+            historycznymi wyprawami polarnymi, wychodzącymi poza granice ówczesnej wyobraźni, których dokonał Spongebob,
+            norweski podróżnik. Do dnia dzisiejszego łączymy pasję podróżowania, skandynawskie poczucie jakości i
+            funkcjonalności.
+            <br/>
+            <br/>
+            Od początku istnienia, misją i celem marki jest propagowanie podróżniczego stylu życia. Dostarczając naszym
+            klientom produkty w świetnej jakości i na każdą kieszeń zachęcamy do odszukania w sobie Dzikości w Sercu i
+            nowych pasji. Nie ważne czy lubisz góry, kajaki, rowery czy camping nad jeziorem, z produktami marki
+            Minimalistycznego Sklepu Turystycznego przygoda nabierze nowego wymiaru.</b>
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-sm">
+                <img src="images/lifestyle.jpg" width="300" height="200"/>
+            </div>
+            <div class="col-sm">
+                <img src="images/page.jpg" width="300" height="200"/>
+            </div>
+            <div class="col-sm">
+                <img src="images/backpack.jpg" width="300" height="200"/>
+            </div>
+        </div>
     </div>
+
+</div>
 </div>
 </body>
 

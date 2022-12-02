@@ -69,7 +69,7 @@ if ($connection->connect_errno != 0 && $debug == 1) {
     ?>
     <br/>
     <div style="background-color: #f4f6f2">
-        <b>Historia zamówień:</b>
+        <b>Historia zamówień</b>
     </div>
     <br/>
 
